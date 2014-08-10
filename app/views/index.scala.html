@@ -16,8 +16,8 @@
     <script src='@routes.Assets.at("javascripts/hello.js")' type="text/javascript"></script>
 </head>
 
-<body unresolved>
-<core-header-panel flex>
+<body>
+<core-header-panel>
 
     <core-toolbar class="short">
         <div class="middle"><span class="es_logo_png"></span></div>
@@ -25,21 +25,20 @@
         <!--<div class="bottom indent small">Eliminuję slajdy w galeriach na większości polskich portali.</div>-->
 
     </core-toolbar>
-    <div class="content" fit>content fits 100% below the header
+    <div class="content" horizontal layout justified fit>
 
-
-
-
-
-    a
-        a
-        a
-        a
-        a
-
-        a
-        a
-        a
+            <div class="card" flex>
+                <h2>Wesprzyj rozwój Eliminatora Slajdów. Przekaz darowiznę.</h2>
+                <paper-shadow z="1"></paper-shadow>
+            </div>
+            <div class="card" flex>
+                <h2>Zgłoś probem z działaniem ES</h2>
+                <paper-shadow z="1"></paper-shadow>
+            </div>
+            <div class="card" flex>
+                <h2>Dodaj sugestię</h2>
+                <paper-shadow z="1"></paper-shadow>
+            </div>
     </div>
 
 </core-header-panel>
@@ -55,6 +54,8 @@
       titleStyle.transform = titleStyle.webkitTransform =
           'scale(' + scale + ') translateZ(0)';
     });
+
+
 
 
 
