@@ -1,7 +1,67 @@
-@(message: String)
+<!DOCTYPE html>
 
-@main("Welcome to Play") {
+<html>
+<head>
+    <title>Eliminator Slajdów</title>
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+    <script src='@routes.Assets.at("components/platform/platform.js")'></script>
+    <link rel="import" href='@routes.Assets.at("components/font-roboto/roboto.html")'>
+    <link rel="import" href='@routes.Assets.at("components/core-header-panel/core-header-panel.html")'>
+    <link rel="import" href='@routes.Assets.at("components/core-toolbar/core-toolbar.html")'>
+    <link rel="import" href='@routes.Assets.at("components/paper-tabs/paper-tabs.html")'>
+    <link rel="import" href='@routes.Assets.at("components/paper-shadow/paper-shadow.html")'>
+    <!--<link rel="import" href='@routes.Assets.at("components/post-list.html")'>-->
+    <link rel="stylesheet" media="screen" href='@routes.Assets.at("stylesheets/main.css")'>
+    <link rel="shortcut icon" type="image/png" href='@routes.Assets.at("images/favicon.png")'>
+    <script src='@routes.Assets.at("javascripts/hello.js")' type="text/javascript"></script>
+</head>
 
-    @play20.welcome(message)
+<body unresolved>
+<core-header-panel flex>
 
-}
+    <core-toolbar class="short">
+        <div class="middle"><span class="es_logo_png"></span></div>
+        <div class="middle indent title">Eliminator Slajdów</div>
+        <!--<div class="bottom indent small">Eliminuję slajdy w galeriach na większości polskich portali.</div>-->
+
+    </core-toolbar>
+    <div class="content" fit>content fits 100% below the header
+
+
+
+
+
+    a
+        a
+        a
+        a
+        a
+
+        a
+        a
+        a
+    </div>
+
+</core-header-panel>
+
+<script>
+
+    // custom transformation: scale header's title
+    var titleStyle = document.querySelector('.title').style;
+    addEventListener('core-header-transform', function(e) {
+      var d = e.detail;
+      var m = d.height - d.condensedHeight;
+      var scale = Math.max(0.75, (m - d.y) / (m / 0.25)  + 0.75);
+      titleStyle.transform = titleStyle.webkitTransform =
+          'scale(' + scale + ') translateZ(0)';
+    });
+
+
+
+
+
+
+</script>
+
+</body>
+</html>
