@@ -16,19 +16,32 @@
     <script src='@routes.Assets.at("javascripts/hello.js")' type="text/javascript"></script>
 </head>
 
-<body>
+<body unresolved>
 <core-header-panel>
 
     <core-toolbar class="short">
-        <div class="middle"><span class="es_logo_png"></span></div>
-        <div class="middle indent title">Eliminator Slajdów</div>
-        <!--<div class="bottom indent small">Eliminuję slajdy w galeriach na większości polskich portali.</div>-->
+        <div class="middle logo"><span class="es_logo_png"></span></div>
+        <div class="middle header_text"><span class="black">Eliminator</span> <span class="red">Slajdów</span>
+            <p>Eliminuję slajdy w galeriach na większości polskich portali.</p>
+        </div>
+        <div class="downloadPanel">
+            <img src="@routes.Assets.at("images/chrome_icon.png")">
+            <img src="@routes.Assets.at("images/firefox_icon.png")">
+        </div>
 
     </core-toolbar>
-    <div class="content" horizontal layout justified fit>
+    <div class="content" vertical layout justified fit>
+        <div horizontal center-justified layout>
+            <div class="donationPanel">
+                <h3>Przekaz darowiznę</h3>
 
+                <p>Wesprzyj rozwój Eliminatora Slajdów.</p>
+                <paper-shadow z="1"></paper-shadow>
+            </div>
+        </div>
+        <div class="cardPanel" horizontal layout justified>
             <div class="card" flex>
-                <h2>Wesprzyj rozwój Eliminatora Slajdów. Przekaz darowiznę.</h2>
+                <h2>Zgłoś probem z działaniem ES</h2>
                 <paper-shadow z="1"></paper-shadow>
             </div>
             <div class="card" flex>
@@ -39,8 +52,11 @@
                 <h2>Dodaj sugestię</h2>
                 <paper-shadow z="1"></paper-shadow>
             </div>
+        </div>
     </div>
+    <div class="footer">
 
+    </div>
 </core-header-panel>
 
 <script>
@@ -54,6 +70,11 @@
       titleStyle.transform = titleStyle.webkitTransform =
           'scale(' + scale + ') translateZ(0)';
     });
+
+
+
+
+
 
 
 
