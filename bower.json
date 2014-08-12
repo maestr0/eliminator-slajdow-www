@@ -1,6 +1,6 @@
 {
   "name": "eliminator-slajdow-www",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "homepage": "https://github.com/maestr0/eliminator-slajdow-www",
   "authors": [
     "Pawel Raszewski <raszewski@gmail.com>"
@@ -8,8 +8,7 @@
   "description": "Eliminator Slajdow - strona www",
   "keywords": [
     "eliminator",
-    "slajdow",
-    "polymer"
+    "slajdow"
   ],
   "license": "MIT",
   "private": true,
@@ -21,8 +20,5 @@
     "tests"
   ],
   "dependencies": {
-    "polymer": "Polymer/polymer#~0.3.4",
-    "core-elements": "Polymer/core-elements#~0.3.4",
-    "paper-elements": "Polymer/paper-elements#~0.3.4"
   }
 }
