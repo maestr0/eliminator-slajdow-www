@@ -7,6 +7,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" media="screen" href='@routes.Assets.at("stylesheets/main.css")'>
     <link rel="shortcut icon" type="image/png" href='@routes.Assets.at("images/favicon.png")'>
+    <!--dla inline install z Web Store-->
+    <link rel="chrome-webstore-item"
+          href="https://chrome.google.com/webstore/detail/eplekpmdodlgejgogbojajncdlapamff">
+
     <!-- Bootstrap -->
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
@@ -66,17 +70,30 @@
         </div>
         <div class="row clearfix">
             <div class="col-md-4 column">
-                <h2>Pobierz</h2>
+                <h2>Zainstaluj ES</h2>
 
                 <p></p>
+                <img src='@routes.Assets.at("images/firefox_icon.png")' alt="Donate Bitcoin" width="50">
                 <button type="button" class="btn btn-success button  prominent  add installer"
                         data-hash="sha256:1733d384f8a1b14d324c9c000bf830487e2078821a27e9ba918a8a2c6b152c19"
                         href="https://addons.mozilla.org/firefox/downloads/latest/412518/addon-412518-latest.xpi?src=eliminator-slajdow.herokuapp.com">
-                    Zainstaluj
+                    Zainstaluj w Firefox
                 </button>
                 <p>
-                    <link rel="chrome-webstore-item"
-                          href="https://chrome.google.com/webstore/detail/eplekpmdodlgejgogbojajncdlapamff">
+                    <img src='@routes.Assets.at("images/chrome_icon.png")' alt="Donate Bitcoin" width="50">
+
+
+
+                    <button type="button" class="btn btn-success add button" onclick="chrome.webstore.install()" id="install-button">Dodaj do Chrome</button>
+                    <script>
+if (chrome.app.isInstalled) {
+  document.getElementById('install-button').style.display = 'none';
+}
+</script>
+
+
+
+
                 </p>
             </div>
             <div class="col-md-4 column">
@@ -105,12 +122,12 @@
     <div class="container">
         <ul class="list-inline">
             <li>
-                <p class="text-muted credit"><a href="https://github.com/maestr0">Paweł Raszewski</a>
-                    2014</p>
-            </li>
-            <li>
                 <p class="text-muted credit">Eliminator Slajdów - licencja <a
                         href="http://www.gnu.org/licenses/gpl-3.0.txt">GPL v3</a></p>
+            </li>
+            <li>
+                <p class="text-muted credit"><a href="https://github.com/maestr0">Paweł Raszewski</a>
+                    2014</p>
             </li>
         </ul>
     </div>
@@ -124,6 +141,7 @@
 
   ga('create', 'UA-44535901-3', 'auto');
   ga('send', 'pageview');
+
 
 
 
