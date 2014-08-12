@@ -13,8 +13,4 @@ libraryDependencies ++= Seq(
   "org.mockito" % "mockito-all" % "1.9.5" % "test",
   "com.h2database" % "h2" % "1.3.175" % "test",
   "ch.qos.logback" % "logback-classic" % "1.0.6"
-  jdbc,
-  anorm,
-  cache,
-  ws
 )
