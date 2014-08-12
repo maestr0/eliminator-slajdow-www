@@ -39,6 +39,7 @@ body {
 #footer > .container {
   padding-left: 15px;
   padding-right: 15px;
+  text-align: center;
 }
 
 #footer .container ul {
@@ -52,4 +53,12 @@ body {
 
 code {
   font-size: 80%;
+}
+
+.navbar-brand {
+    background: url('../images/es_logo.svg') no-repeat 18px;
+    background-size: 50px;
+    width: 300px;
+    margin-right: 60px;
+    text-align: right;
 }
