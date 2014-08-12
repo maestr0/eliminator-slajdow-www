@@ -1,4 +1,4 @@
-<!-- Fixed navbar -->
+@(pageName: String)
 <div class="navbar navbar-default navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
@@ -11,9 +11,9 @@
         </div>
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Start</a></li>
-                <li><a href="#about">Pobierz</a></li>
-                <li><a href="#contact">O autorze</a></li>
+                <li class='@{if(pageName=="start") "active" else ""}'><a href="/">Start</a></li>
+                <li class='@{if(pageName=="sourceCode") "active" else ""}'><a href="/kod">Kod źródłowy ES</a></li>
+                <li class='@{if(pageName=="about") "active" else ""}'><a href="/oautorze">O autorze</a></li>
             </ul>
         </div>
         <!--/.nav-collapse -->

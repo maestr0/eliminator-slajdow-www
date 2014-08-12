@@ -1,3 +1,4 @@
+@(pageName:String = "start")
 <!DOCTYPE html>
 
 <html>
@@ -25,9 +26,11 @@
 <body>
 <!-- Wrap all page content here -->
 <div id="wrap">
-    @navigationBar()
+    @navigationBar(pageName)
     <!-- Begin page content -->
-    @content()
+    <div class="container">
+        @mainContent()
+    </div>
 </div>
 @footer()
 <script>
@@ -38,6 +41,8 @@
 
   ga('create', 'UA-44535901-3', 'auto');
   ga('send', 'pageview');
+
+
 
 
 
