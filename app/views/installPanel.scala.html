@@ -1,29 +1,28 @@
-
 <h2>Zainstaluj ES</h2>
 
 <p></p>
 <img src='@routes.Assets.at("images/firefox_icon.png")' alt="Donate Bitcoin" width="50">
-<button type="button" class="btn btn-success button  prominent  add installer"
+<button type="button" class="disabled btn btn-success button  prominent  add installer"
         data-hash="sha256:1733d384f8a1b14d324c9c000bf830487e2078821a27e9ba918a8a2c6b152c19"
-        href="https://addons.mozilla.org/firefox/downloads/latest/412518/addon-412518-latest.xpi?src=eliminator-slajdow.herokuapp.com">
-    Zainstaluj w Firefox
+        href="https://addons.mozilla.org/firefox/downloads/latest/412518/addon-412518-latest.xpi?src=eliminator-slajdow.herokuapp.com"
+        id="ff-install-button" >
+    <span class="glyphicon glyphicon-plus"></span> Dodaj do Firefox
 </button>
 <p>
 
     <img src='@routes.Assets.at("images/chrome_icon.png")' alt="Donate Bitcoin" width="50">
 
 
-    <button type="button" class="btn btn-success add button" onclick="chrome.webstore.install()"
-            id="install-button">Dodaj do Chrome
+    <button type="button" class="btn disabled btn-success add button" onclick="chrome.webstore.install()"
+            id="chrome-install-button"><span class="glyphicon glyphicon-plus"></span> Dodaj do Chrome
     </button>
-    <script>
-if (chrome.app.isInstalled) {
-  document.getElementById('install-button').style.display = 'none';
+<script>
+if (navigator.userAgent.match(/Chrome/i)){
+    $("#chrome-install-button").removeClass("disabled");
+}else if (navigator.userAgent.match(/Firefox/i)){
+   $("#ff-install-button").removeClass("disabled");
 }
-
-
-
-                </script>
+</script>
 
 
 </p>
