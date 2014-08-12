@@ -62,3 +62,7 @@ code {
     margin-right: 60px;
     text-align: right;
 }
+
+.button.add {
+    background: linear-gradient(#84C63C, #489615) repeat scroll 0% 0% #489615;
+}
