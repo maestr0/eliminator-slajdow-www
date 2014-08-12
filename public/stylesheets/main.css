@@ -65,3 +65,11 @@ code {
 .button.add {
     width: 200px;
 }
+
+.page_sourceCode .container img {
+    width: 300px;
+    margin: 50px;
+}
+.page_sourceCode .container {
+    text-align: center;
+}
