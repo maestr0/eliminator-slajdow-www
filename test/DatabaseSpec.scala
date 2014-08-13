@@ -9,7 +9,7 @@ import scala.slick.driver.H2Driver.simple._
 
 class DatabaseSpec extends FlatSpec with Matchers with MockitoSugar with BeforeAndAfterAll {
 
-  val config = ConfigFactory.load("database.development.conf")
+  val config = ConfigFactory.load("database.production.conf")
   val rdsConfig = config.resolve().getConfig("rds")
 
   lazy val rdsJdbcConnectionString = rdsConfig.getString("database-jdbc")
@@ -17,7 +17,9 @@ class DatabaseSpec extends FlatSpec with Matchers with MockitoSugar with BeforeA
   lazy val rdsUser = rdsConfig.getString("database-user")
   lazy val rdsPassword = rdsConfig.getString("database-password")
 
-  val database = Database.forURL(rdsJdbcConnectionString, rdsDriver)
+  println(rdsConfig)
+
+  val database = Database.forURL(rdsJdbcConnectionString, user = rdsUser, password = rdsPassword, driver = rdsDriver)
   implicit val session: Session = database.createSession()
 
   def populateDatabase(): Unit = {
