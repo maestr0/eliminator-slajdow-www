@@ -17,7 +17,7 @@ class ApplicationSpec extends Specification {
 
     "send 404 on a bad request" in new WithApplication{
       route(FakeRequest(GET, "/boum")) must beNone
-      val errorPage = route(FakeRequest(GET, "/boum")).get
+//      val errorPage = route(FakeRequest(GET, "/boum")).get
 //      contentAsString(errorPage) must contain ("Coś się zepsuło ;(")
     }
 

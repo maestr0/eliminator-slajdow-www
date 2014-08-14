@@ -1,3 +1,4 @@
+import init.Init
 import play.api._
 import play.api.mvc.Results._
 import play.api.mvc._
@@ -8,6 +9,7 @@ object Global extends GlobalSettings {
 
   override def onStart(app: Application) {
     Logger.info("Application has started")
+    Init.init
   }
 
   override def onStop(app: Application) {
@@ -19,6 +21,4 @@ object Global extends GlobalSettings {
       views.html.errorPage()
     ))
   }
-
-
 }
