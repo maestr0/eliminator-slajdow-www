@@ -5,7 +5,7 @@
 <button type="button" class="disabled btn btn-success button  prominent  add installer"
         data-hash="sha256:1733d384f8a1b14d324c9c000bf830487e2078821a27e9ba918a8a2c6b152c19"
         href="https://addons.mozilla.org/firefox/downloads/latest/412518/addon-412518-latest.xpi?src=eliminator-slajdow.herokuapp.com"
-        id="ff-install-button" >
+        id="ff-install-button">
     <span class="glyphicon glyphicon-plus"></span> Dodaj do Firefox
 </button>
 <p>
@@ -16,14 +16,34 @@
     <button type="button" class="btn disabled btn-success add button" onclick="chrome.webstore.install()"
             id="chrome-install-button"><span class="glyphicon glyphicon-plus"></span> Dodaj do Chrome
     </button>
-<script>
+    <script>
 if (navigator.userAgent.match(/Chrome/i)){
     $("#chrome-install-button").removeClass("disabled");
 }else if (navigator.userAgent.match(/Firefox/i)){
    $("#ff-install-button").removeClass("disabled");
 }
-</script>
+
+    </script>
 
 
 </p>
-        
+
+<div class="gplus">
+    <!-- Place this tag where you want the share button to render. -->
+    <div class="g-plus" data-action="share" data-height="24" data-href="http://eliminator-slajdow.herokuapp.com/"></div>
+
+    <!-- Place this tag after the last share tag. -->
+    <script type="text/javascript">
+  window.___gcfg = {lang: 'pl'};
+
+  (function() {
+    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://apis.google.com/js/platform.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  })();
+
+    </script>
+</div>
+
+<div class="fb-like-box" data-href="https://www.facebook.com/eliminator.slajdow" data-colorscheme="light"
+     data-show-faces="true" data-header="true" data-stream="false" data-show-border="true"></div>

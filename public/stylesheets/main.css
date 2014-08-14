@@ -73,3 +73,8 @@ code {
 .page_sourceCode .container {
     text-align: center;
 }
+
+.gplus {
+    float: left;
+    margin: 30px 0;
+}
