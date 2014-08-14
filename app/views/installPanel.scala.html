@@ -25,24 +25,20 @@ if (navigator.userAgent.match(/Chrome/i)){
 
     </script>
 
-
+    <button onclick="chrome.webstore.install()" id="install-button">Add to Chrome</button>
+    <script>
+if (chrome.app.isInstalled) {
+  document.getElementById('install-button').style.display = 'none';
+}
+</script>
 </p>
 
 <div class="gplus">
-    <!-- Place this tag where you want the share button to render. -->
-    <div class="g-plus" data-action="share" data-height="24" data-href="http://eliminator-slajdow.herokuapp.com/"></div>
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script src="https://apis.google.com/js/platform.js" async defer>{lang: 'pl'}</script>
 
-    <!-- Place this tag after the last share tag. -->
-    <script type="text/javascript">
-  window.___gcfg = {lang: 'pl'};
-
-  (function() {
-    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-    po.src = 'https://apis.google.com/js/platform.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
-  })();
-
-    </script>
+    <!-- Place this tag where you want the +1 button to render. -->
+    <div class="g-plusone" data-annotation="inline" data-width="300" data-href="http://eliminator-slajdow.herokuapp.com"></div>
 </div>
 
 <div class="fb-like-box" data-href="https://www.facebook.com/eliminator.slajdow" data-colorscheme="light"

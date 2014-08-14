@@ -33,7 +33,7 @@ body {
   padding: 70px 15px 0;
 }
 .container .credit {
-  margin: 20px 0;
+  /* margin: 20px 0; */
 }
 
 #footer > .container {
@@ -47,19 +47,20 @@ body {
     margin-top: 5px;
 }
 
-#footer .container ul li {
+#footer .container .row {
+    margin-top: 23px;
 }
 
 code {
   font-size: 80%;
 }
 
-.navbar-brand {
+.navbar-logo {
     background: url('../images/es_logo.svg') no-repeat 18px;
     background-size: 50px;
-    width: 300px;
-    margin-right: 60px;
-    text-align: right;
+    float: left;
+    width: 74px;
+    height: 50px;
 }
 
 .button.add {
@@ -67,8 +68,8 @@ code {
 }
 
 .page_sourceCode .container img {
-    width: 300px;
-    margin: 50px;
+    width: 200px;
+    margin: 50px 0;
 }
 .page_sourceCode .container {
     text-align: center;
@@ -77,4 +78,8 @@ code {
 .gplus {
     float: left;
     margin: 30px 0;
+}
+
+.fb-like-box {
+    margin-bottom: 20px;
 }

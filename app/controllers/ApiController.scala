@@ -8,7 +8,7 @@ object ApiController extends Controller {
 
   val db = Init.dbManager
 
-  def suggestions = Action(parse.json) { request =>
+  def suggestions = Action {
     val list = db.suggestions.map(_.pageUrl)
     list foreach println
     Ok
