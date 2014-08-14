@@ -17,8 +17,6 @@ class DatabaseSpec extends FlatSpec with Matchers with MockitoSugar with BeforeA
   lazy val rdsUser = rdsConfig.getString("database-user")
   lazy val rdsPassword = rdsConfig.getString("database-password")
 
-  println(rdsConfig)
-
   val database = Database.forURL(rdsJdbcConnectionString, user = rdsUser, password = rdsPassword, driver = rdsDriver)
   implicit val session: Session = database.createSession()
 
@@ -30,12 +28,12 @@ class DatabaseSpec extends FlatSpec with Matchers with MockitoSugar with BeforeA
   }
 
   override def beforeAll() = {
-    createSchema()
+//    createSchema()
     populateDatabase()
   }
 
   override def afterAll() = {
-    dropSchema()
+//    dropSchema()
     session.close()
   }
 
