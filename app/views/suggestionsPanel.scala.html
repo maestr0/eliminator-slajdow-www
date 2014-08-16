@@ -3,33 +3,45 @@
 <p>Jeżeli Twoja propozycja będzie popularna to zostanie w pierwszej kolejności dodana do ES.</p>
 
 <p>
-    <button data-toggle="modal" data-target="#myModal" type="button" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Dodaj</button>
+    <button data-toggle="modal" data-target="#suggestionModal" type="button" class="btn btn-primary"><span
+            class="glyphicon glyphicon-plus"></span> Dodaj
+    </button>
 </p>
 
 <!-- Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="suggestionModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Zamknij</span></button>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span
+                        class="sr-only">Zamknij</span></button>
                 <h4 class="modal-title" id="myModalLabel">Dodaj nową sugestię</h4>
             </div>
             <div class="modal-body">
                 <form role="form">
                     <div class="form-group">
-                        <label for="exampleInputEmail1">Adres WWW</label>
-                        <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Adres WWW">
+                        <label for="adress_url">Adres WWW</label>
+                        <input type="url" class="form-control" id="adress_url" placeholder="www.przykladowastrona.com">
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputPassword1">Link do galerii</label>
-                        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="link do galerii">
+                        <label for="gallery_url">Link do galerii</label>
+                        <input type="url" class="form-control" id="gallery_url"
+                               placeholder="www.przykladowastrona.pl/galeria1">
+                    </div>
+                    <div class="form-group">
+                        <label for="comment">Komentarz</label>
+                        <textarea class="form-control" rows="3" id="comment"></textarea>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Anuluj</button>
-                <button type="button" class="btn btn-primary "><span class="glyphicon glyphicon-plus"></span> Dodaj</button>
+                <button type="button" class="btn btn-primary "><span class="glyphicon glyphicon-plus"></span> Dodaj
+                </button>
             </div>
         </div>
     </div>
 </div>
+
+<h2>Sugestie</h2>

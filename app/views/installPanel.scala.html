@@ -10,7 +10,7 @@
     <img src='@routes.Assets.at("images/chrome_icon.png")' alt="Donate Bitcoin" width="50">
 
 
-    <button type="button" class="btn disabled btn-success add button" onclick="chrome.webstore.install()"
+    <button type="button" class="btn disabled btn-success add button" onclick="chrome.webstore.install();_gaq.push(['_trackEvent', 'chrome_install', 'click']);"
             id="chrome-install-button"><span class="glyphicon glyphicon-plus"></span> Dodaj do Chrome
     </button>
     <script>
