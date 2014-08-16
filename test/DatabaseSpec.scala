@@ -22,15 +22,12 @@ class DatabaseSpec extends FlatSpec with Matchers with MockitoSugar with BeforeA
 
   def populateDatabase(): Unit = {
     val timestamp = new Timestamp(System.currentTimeMillis())
-    Suggestions += SuggestionsRow(1, "test1.com", "gallery.test.com", "metadata", timestamp, None)
-    Suggestions += SuggestionsRow(1, "test2.com", "gallery.test.com", "metadata", timestamp, None)
-    Suggestions += SuggestionsRow(1, "test3.com", "gallery.test.com", "metadata", timestamp, None)
-
-    Issues += IssuesRow(1, "issue", "issue test", "desc", timestamp, None)
+    Suggestions += SuggestionsRow(1, "gazeta.pl", "gazeta.pl/galeria121312/asdasd", "no i znowu cos nie dziala ;(", timestamp, None)
+    Issues += IssuesRow(1, "3.1.2-chrome", "http://gazeta.pl/gallery1", "nie dziala ;(", timestamp, None)
   }
 
   override def beforeAll() = {
-    createSchema()
+//    createSchema()
     populateDatabase()
   }
 

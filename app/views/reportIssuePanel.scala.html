@@ -1,5 +1,5 @@
 
-<h2>Widzisz błąd? Zgłoś to!</h2>
+<h2>Zauważyłeś błąd?</h2>
 
 <p>Jeżeli ES nie działa poprawnie na jakiejś stronie, zgłoś to abym mógł zrobić poprawkę.</p>
 
@@ -43,9 +43,9 @@
 <ul class="list-group">
     @init.Init.dbManager.issues.map { s =>
     <li class="list-group-item">
-        <h4 class="list-group-item-heading">@s.pageUrl</h4>
-        <p class="list-group-item-text">@s.galleryUrl</p>
-        <p class="list-group-item-text">@s.metadata</p>
+        <h4 class="list-group-item-heading"><a href="@s.galleryUrl">@s.galleryUrl</a></h4>
+        <p class="list-group-item-text">@s.comment</p>
+        <p class="list-group-item-text"><span class="label label-primary">@s.esVersion</span></p>
     </li>
     }
 </ul>

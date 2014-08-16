@@ -21,4 +21,12 @@ object Global extends GlobalSettings {
       views.html.errorPage()
     ))
   }
+
+  override def onHandlerNotFound(request: RequestHeader) = {
+    Future.successful(NotFound)
+  }
+
+  override def onBadRequest(request: RequestHeader, error: String) = {
+    Future.successful(BadRequest("Bad Request: " + error))
+  }
 }

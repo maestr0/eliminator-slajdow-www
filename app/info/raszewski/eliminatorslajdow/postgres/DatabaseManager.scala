@@ -27,13 +27,13 @@ class DatabaseManager(config: Config) {
 
   def suggestions = {
     db.withTransaction { implicit session =>
-      Tables.Suggestions.list
+      Tables.Suggestions.sortBy(_.createdAt).filter(_.deletedAt.isEmpty).list
     }
   }
 
   def issues = {
     db.withTransaction { implicit session =>
-      Tables.Issues.list
+      Tables.Issues.sortBy(_.createdAt).filter(_.deletedAt.isEmpty).list
     }
   }
 }
