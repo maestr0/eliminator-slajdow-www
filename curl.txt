@@ -1,0 +1,2 @@
+curl -s -X GET localhost:9000/api/suggestions
+curl -i -H "Content-Type: application/json" -X POST localhost:9000/api/suggestions -d '{"comment": "my comment", "pageUrl": "gazeta.pl", "galleryUrl": "jakas galeria"}'

@@ -40,4 +40,9 @@ class DatabaseSpec extends FlatSpec with Matchers with MockitoSugar with BeforeA
     Suggestions.foreach(println)
     Issues.foreach(println)
   }
+
+  it should "create an issue" in {
+
+
+  }
 }
