@@ -25,10 +25,12 @@ class DatabaseSpec extends FlatSpec with Matchers with MockitoSugar with BeforeA
     Suggestions += SuggestionsRow(1, "test1.com", "gallery.test.com", "metadata", timestamp, None)
     Suggestions += SuggestionsRow(1, "test2.com", "gallery.test.com", "metadata", timestamp, None)
     Suggestions += SuggestionsRow(1, "test3.com", "gallery.test.com", "metadata", timestamp, None)
+
+    Issues += IssuesRow(1, "issue", "issue test", "desc", timestamp, None)
   }
 
   override def beforeAll() = {
-//    createSchema()
+    createSchema()
     populateDatabase()
   }
 
@@ -39,5 +41,6 @@ class DatabaseSpec extends FlatSpec with Matchers with MockitoSugar with BeforeA
 
   it should "work" in {
     Suggestions.foreach(println)
+    Issues.foreach(println)
   }
 }

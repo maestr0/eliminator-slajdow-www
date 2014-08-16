@@ -30,4 +30,10 @@ class DatabaseManager(config: Config) {
       Tables.Suggestions.list
     }
   }
+
+  def issues = {
+    db.withTransaction { implicit session =>
+      Tables.Issues.list
+    }
+  }
 }
