@@ -6,6 +6,7 @@ import play.api.libs.json._
 import models.{Issue, Suggestion}
 import scala.concurrent.Future
 import scala.util.Success
+import play.api.data.validation.ValidationError
 
 object ApiController extends Controller {
 
@@ -39,10 +40,13 @@ object ApiController extends Controller {
     request =>
       request.body.asOpt[Suggestion] match {
         case Some(suggestion) =>
-          db.createSuggestion(suggestion) match {
-            case Success(_) => Created(Json.toJson(suggestion))
-            case _ => InternalServerError("Cannot parse JSON as Suggestion.")
-          }
+          if (suggestion.pageUrl.isEmpty || suggestion.galleryUrl.isEmpty)
+            InternalServerError("Proszę wypełnić wszystkie wymagane pola")
+          else
+            db.createSuggestion(suggestion) match {
+              case Success(_) => Created(Json.toJson(suggestion))
+              case _ => InternalServerError("Cannot parse JSON as Suggestion.")
+            }
         case None => BadRequest("Cannot parse JSON as Suggestion.")
       }
   }

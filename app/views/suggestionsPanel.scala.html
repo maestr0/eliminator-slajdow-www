@@ -19,7 +19,7 @@
                 <h4 class="modal-title" id="myModalLabel">Dodaj nową sugestię</h4>
             </div>
             <div class="modal-body">
-                <form role="form">
+                <form role="form" method="post" src>
                     <div class="form-group">
                         <label for="adress_url">Adres WWW</label>
                         <input type="url" class="form-control" id="adress_url" placeholder="www.przykladowastrona.com">
@@ -37,7 +37,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Anuluj</button>
-                <button type="button" class="btn btn-primary "><span class="glyphicon glyphicon-plus"></span> Dodaj
+                <button id="addSuggestion" type="button" class="btn btn-primary "><span class="glyphicon glyphicon-plus"></span> Dodaj
                 </button>
             </div>
         </div>
