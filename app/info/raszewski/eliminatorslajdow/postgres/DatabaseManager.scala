@@ -8,7 +8,7 @@ import scala.slick.driver.PostgresDriver.simple._
 class DatabaseManager(config: Config) {
 
   val ds = new BoneCPDataSource
-  val db = {
+  lazy val db = {
     lazy val rdsJdbcConnectionString = config.getString("database-jdbc")
     lazy val rdsDriver = config.getString("database-driver")
     lazy val rdsUser = config.getString("database-user")
