@@ -1,5 +1,4 @@
   $("#addSuggestion").click(function(){
-    ga('send', 'event', 'button', 'click', 'addSuggestion');
       $.ajax({
         beforeSend: function(xhrObj){
               xhrObj.setRequestHeader("Content-Type","application/json");
@@ -21,31 +20,34 @@
           });
 })
 
-
-
-
-
 $('#issueModal #issue_es_version').val($("body").attr("es-version-data"));
-    $("#addIssue").click(function(){
-        ga('send', 'event', 'button', 'click', 'addIssue');
+$("#addIssue").click(function(){
+  $.ajax({
+    beforeSend: function(xhrObj){
+          xhrObj.setRequestHeader("Content-Type","application/json");
+          xhrObj.setRequestHeader("Accept","html/text");
+      },
+    type: "POST",
+    url: "/api/issues",
+    data: JSON.stringify({"email": $('#issueModal #issue_email').val(), "comment": $('#issueModal #issue_comment').val(), "esVersion": $('#issue_es_version').val(), "galleryUrl": $('#issueModal #issue_gallery_url').val()}),
+    success: function( data ) {
+        $('#issueModal').modal('hide');
+        $(".reportIssuePanel ul").prepend(data);
+        $('#issueModal input, #issueModal textarea').val("");
+        ga('send', 'event', 'button', 'click', 'submitIssue');
+        },
+    dataType: "html"
+  }).fail(function(a,b,c) {
+            $('#issueModal .modal-body .alert').remove();
+            $('#issueModal .modal-body form').after('<div class="alert alert-danger" role="alert">' + a.responseText + '</div>')
+      });
+})
 
-      $.ajax({
-        beforeSend: function(xhrObj){
-              xhrObj.setRequestHeader("Content-Type","application/json");
-              xhrObj.setRequestHeader("Accept","html/text");
-          },
-        type: "POST",
-        url: "/api/issues",
-        data: JSON.stringify({"email": $('#issueModal #issue_email').val(), "comment": $('#issueModal #issue_comment').val(), "esVersion": $('#issue_es_version').val(), "galleryUrl": $('#issueModal #issue_gallery_url').val()}),
-        success: function( data ) {
-            $('#issueModal').modal('hide');
-            $(".reportIssuePanel ul").prepend(data);
-            $('#issueModal input, #issueModal textarea').val("");
-            ga('send', 'event', 'button', 'click', 'submitIssue');
-            },
-        dataType: "html"
-      }).fail(function(a,b,c) {
-                $('#issueModal .modal-body .alert').remove();
-                $('#issueModal .modal-body form').after('<div class="alert alert-danger" role="alert">' + a.responseText + '</div>')
-          });
-      })
+
+$('#suggestionModal').on('shown.bs.modal', function (e) {
+  ga('send', 'event', 'button', 'click', 'showModalSuggestion');
+})
+
+$('#issueModal').on('shown.bs.modal', function (e) {
+  ga('send', 'event', 'button', 'click', 'showModalIssue');
+})
