@@ -20,7 +20,6 @@
           });
 })
 
-$('#issueModal #issue_es_version').val($("body").attr("es-version-data"));
 $("#addIssue").click(function(){
   $.ajax({
     beforeSend: function(xhrObj){
@@ -45,9 +44,12 @@ $("#addIssue").click(function(){
 
 
 $('#suggestionModal').on('shown.bs.modal', function (e) {
-  ga('send', 'event', 'button', 'click', 'showModalSuggestion');
+    $('#suggestionModal .modal-body .alert').remove();
+    ga('send', 'event', 'button', 'click', 'showModalSuggestion');
 })
 
 $('#issueModal').on('shown.bs.modal', function (e) {
-  ga('send', 'event', 'button', 'click', 'showModalIssue');
+    $('#issueModal #issue_es_version').val($("body").attr("es-version-data"));
+    $('#issueModal .modal-body .alert').remove();
+    ga('send', 'event', 'button', 'click', 'showModalIssue');
 })
