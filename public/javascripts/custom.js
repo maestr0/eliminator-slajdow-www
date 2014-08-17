@@ -1,4 +1,5 @@
   $("#addSuggestion").click(function(){
+    ga('send', 'event', 'button', 'click', 'addSuggestion');
       $.ajax({
         beforeSend: function(xhrObj){
               xhrObj.setRequestHeader("Content-Type","application/json");
@@ -11,6 +12,7 @@
                              $('#suggestionModal').modal('hide');
                              $(".suggestionsPanel ul").prepend(data);
                              $('#suggestionModal input, #suggestionModal textarea').val("");
+                             ga('send', 'event', 'button', 'click', 'submitSuggestion');
                        },
         dataType: "html"
       }).fail(function(a,b,c) {
@@ -23,9 +25,9 @@
 
 
 
-    $('#issueModal #issue_es_version').val($("body").attr("es-version-data"));
+$('#issueModal #issue_es_version').val($("body").attr("es-version-data"));
     $("#addIssue").click(function(){
-
+        ga('send', 'event', 'button', 'click', 'addIssue');
 
       $.ajax({
         beforeSend: function(xhrObj){
@@ -39,7 +41,8 @@
             $('#issueModal').modal('hide');
             $(".reportIssuePanel ul").prepend(data);
             $('#issueModal input, #issueModal textarea').val("");
-                       },
+            ga('send', 'event', 'button', 'click', 'submitIssue');
+            },
         dataType: "html"
       }).fail(function(a,b,c) {
                 $('#issueModal .modal-body .alert').remove();
