@@ -87,3 +87,9 @@ code {
 .reportIssuePanel ul, .suggestionPanel ul {
     overflow: hidden;
 }
+
+@media (max-width: 360px) {
+    .jumbotron img {
+        width: 300px;
+    }
+}
