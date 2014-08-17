@@ -3,7 +3,7 @@ package models
 import play.api.libs.functional.syntax._
 import play.api.libs.json._
 
-case class Suggestion(pageUrl: String, galleryUrl: String, comment: String, email: String, status: String)
+case class Suggestion(pageUrl: String, galleryUrl: String, comment: String, email: String, status: Option[String])
 
 object Suggestion {
   final val pageUrl = "pageUrl"
@@ -17,7 +17,7 @@ object Suggestion {
       (__ \ galleryUrl).read[String] and
       (__ \ comment).read[String] and
       (__ \ email).read[String] and
-      (__ \ status).read[String]
+      (__ \ status).readNullable[String]
     )(Suggestion.apply _)
 
   implicit val alertWrites: Writes[Suggestion] = (
@@ -25,6 +25,6 @@ object Suggestion {
       (__ \ galleryUrl).write[String] and
       (__ \ comment).write[String] and
       (__ \ email).write[String] and
-      (__ \ status).write[String]
+      (__ \ status).writeNullable[String]
     )(unlift(Suggestion.unapply))
 }

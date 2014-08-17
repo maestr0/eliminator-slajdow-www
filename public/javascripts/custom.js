@@ -6,7 +6,7 @@
           },
         type: "POST",
         url: "/api/suggestions",
-        data: JSON.stringify({"comment": $('#suggestionModal #comment').val(), "pageUrl": $('#suggestionModal #adress_url').val(), "galleryUrl": $('#suggestionModal #gallery_url').val()}),
+        data: JSON.stringify({"email": $('#suggestionModal #email').val(), "comment": $('#suggestionModal #comment').val(), "pageUrl": $('#suggestionModal #adress_url').val(), "galleryUrl": $('#suggestionModal #gallery_url').val()}),
         success: function( data ) {
                              $('#suggestionModal').modal('hide');
                              $(".suggestionsPanel ul").prepend(data);
@@ -34,7 +34,7 @@
           },
         type: "POST",
         url: "/api/issues",
-        data: JSON.stringify({"comment": $('#issueModal #issue_comment').val(), "esVersion": $('#issue_es_version').val(), "galleryUrl": $('#issueModal #issue_gallery_url').val()}),
+        data: JSON.stringify({"email": $('#issueModal #issue_email').val(), "comment": $('#issueModal #issue_comment').val(), "esVersion": $('#issue_es_version').val(), "galleryUrl": $('#issueModal #issue_gallery_url').val()}),
         success: function( data ) {
             $('#issueModal').modal('hide');
             $(".reportIssuePanel ul").prepend(data);
