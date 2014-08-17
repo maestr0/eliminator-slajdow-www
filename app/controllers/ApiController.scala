@@ -15,12 +15,12 @@ object ApiController extends Controller {
   val db = Init.dbManager
 
   def suggestions = Action {
-    val suggestions = db.suggestions.map(s => Suggestion(s.pageUrl, s.galleryUrl, s.comment))
+    val suggestions = db.suggestions.map(s => Suggestion(s.pageUrl, s.galleryUrl, s.comment, s.email, s.status))
     Ok(Json.toJson(suggestions))
   }
 
   def issues = Action {
-    val issues = db.issues.map(i => Issue(i.esVersion, i.galleryUrl, i.comment))
+    val issues = db.issues.map(i => Issue(i.esVersion, i.galleryUrl, i.comment, i.email, i.status))
     Ok(Json.toJson(issues))
   }
 
@@ -28,10 +28,13 @@ object ApiController extends Controller {
     request =>
       request.body.asOpt[Issue] match {
         case Some(issue) =>
-          db.createIssue(issue) match {
-            case Success(_) => Created(Json.toJson(issue))
-            case _ => InternalServerError("Cannot parse JSON as Issue.")
-          }
+          if (issue.comment.isEmpty || issue.galleryUrl.isEmpty)
+            InternalServerError("Proszę wypełnić wszystkie wymagane pola")
+          else
+            db.createIssue(issue) match {
+              case Success(i) => Created(views.html.issue(i))
+              case _ => InternalServerError("Cannot parse JSON as Issue.")
+            }
         case None => BadRequest("Cannot parse JSON as Issue.")
       }
   }
@@ -44,7 +47,7 @@ object ApiController extends Controller {
             InternalServerError("Proszę wypełnić wszystkie wymagane pola")
           else
             db.createSuggestion(suggestion) match {
-              case Success(_) => Created(Json.toJson(suggestion))
+              case Success(s) => Created(views.html.suggestion(s))
               case _ => InternalServerError("Cannot parse JSON as Suggestion.")
             }
         case None => BadRequest("Cannot parse JSON as Suggestion.")

@@ -83,3 +83,7 @@ code {
 .fb-like-box {
     margin-bottom: 20px;
 }
+
+.reportIssuePanel ul, .suggestionPanel ul {
+    overflow: hidden;
+}

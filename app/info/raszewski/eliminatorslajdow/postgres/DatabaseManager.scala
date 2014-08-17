@@ -8,6 +8,8 @@ import models.{Issue, Suggestion}
 import info.raszewski.eliminatorslajdow.postgres.Tables.{IssuesRow, SuggestionsRow}
 import java.sql.Timestamp
 import scala.util.Try
+import org.apache.commons.lang3.StringEscapeUtils
+import org.apache.commons.lang3.StringEscapeUtils.escapeHtml4
 
 class DatabaseManager(config: Config) {
   val ds = new BoneCPDataSource
@@ -42,20 +44,25 @@ class DatabaseManager(config: Config) {
     }
   }
 
-  def createSuggestion(suggestion: Suggestion) = {
+  def createSuggestion(suggestion: Suggestion): Try[SuggestionsRow] = {
     Try {
       db.withTransaction {
         implicit session =>
-          Tables.Suggestions += SuggestionsRow(1, suggestion.pageUrl, suggestion.galleryUrl, suggestion.comment, new Timestamp(System.currentTimeMillis()), None)
+
+          val suggestionsRow: SuggestionsRow = SuggestionsRow(1, escapeHtml4(suggestion.pageUrl), escapeHtml4(suggestion.galleryUrl), escapeHtml4(suggestion.comment), escapeHtml4(suggestion.email), "NOWY", new Timestamp(System.currentTimeMillis()), None)
+          Tables.Suggestions += suggestionsRow
+          suggestionsRow
       }
     }
   }
 
-  def createIssue(issue: Issue) = {
+  def createIssue(issue: Issue): Try[IssuesRow] = {
     Try {
       db.withTransaction {
         implicit session =>
-          Tables.Issues += IssuesRow(1, issue.esVersion, issue.galleryUrl, issue.comment, new Timestamp(System.currentTimeMillis()), None)
+          val issuesRow: IssuesRow = IssuesRow(1, escapeHtml4(issue.esVersion), escapeHtml4(issue.galleryUrl), escapeHtml4(issue.comment),  escapeHtml4(issue.email), "NOWY", new Timestamp(System.currentTimeMillis()), None)
+          Tables.Issues += issuesRow
+          issuesRow
       }
     }
   }
