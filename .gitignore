@@ -29,6 +29,9 @@ src_managed/
 project/boot/
 project/plugins/project/
 
+# heroku config
+.env
+
 # Scala-IDE specific
 .scala_dependencies
 .worksheet
