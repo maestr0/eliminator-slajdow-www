@@ -1,31 +1,24 @@
 package controllers
 
-import com.typesafe.config.ConfigFactory
+
 import info.raszewski.eliminatorslajdow.postgres.DatabaseManager
-import org.scalatest.mock.MockitoSugar
-import org.scalatest.{BeforeAndAfterAll, FlatSpec, Matchers}
+import org.specs2.mutable._
 
-class DatabaseManagerSpec extends FlatSpec with Matchers with MockitoSugar with BeforeAndAfterAll {
+import play.api.test._
+import play.api.test.Helpers._
 
-  val config = ConfigFactory.load("database.production.conf")
-  val rdsConfig = config.resolve().getConfig("rds")
+class DatabaseManagerSpec extends Specification {
 
-  val dm = new DatabaseManager(rdsConfig)
+  val dm = new DatabaseManager()
 
-  def populateDatabase(): Unit = {
+  "Computer model" should {
 
-  }
-
-  override def beforeAll() = {
-
-  }
-
-  override def afterAll() = {
-
-  }
-
-  it should "work" in {
-    assert(dm.suggestions.nonEmpty)
-    dm.suggestions foreach println
+    "be retrieved by id" in {
+      running(FakeApplication()) {
+        assert(dm.suggestions.nonEmpty)
+        dm.suggestions foreach println
+        "Hello world" must startWith("Hello")
+      }
+    }
   }
 }
