@@ -36,3 +36,5 @@ project/plugins/project/
 .scala_dependencies
 .worksheet
 >>>>>>> c3d7b43d20a45c3c20f63dd5cc85fb6149acc3b8
+
+conf/database.production.conf

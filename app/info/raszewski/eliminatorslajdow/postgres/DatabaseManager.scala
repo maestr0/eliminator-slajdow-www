@@ -7,17 +7,19 @@ import scala.slick.driver.PostgresDriver.simple._
 import models.{Issue, Suggestion}
 import info.raszewski.eliminatorslajdow.postgres.Tables.{IssuesRow, SuggestionsRow}
 import java.sql.Timestamp
-import scala.util.Try
-import org.apache.commons.lang3.StringEscapeUtils
+import scala.util.{Properties, Try}
 import org.apache.commons.lang3.StringEscapeUtils.escapeHtml4
+import info.raszewski.eliminatorslajdow.emails.EmailSender
+import scala.concurrent._
+import ExecutionContext.Implicits.global
 
 class DatabaseManager(config: Config) {
   val ds = new BoneCPDataSource
   lazy val db = {
-    lazy val rdsJdbcConnectionString = config.getString("database-jdbc")
-    lazy val rdsDriver = config.getString("database-driver")
-    lazy val rdsUser = config.getString("database-user")
-    lazy val rdsPassword = config.getString("database-password")
+    lazy val rdsJdbcConnectionString = Properties.envOrElse("DB_JDBC", config.getString("database-jdbc"))
+    lazy val rdsDriver = Properties.envOrElse("DB_DRIVER", config.getString("database-driver"))
+    lazy val rdsUser = Properties.envOrElse("DB_USER", config.getString("database-user"))
+    lazy val rdsPassword = Properties.envOrElse("DB_PASSWORD", config.getString("database-password"))
 
     ds.setDriverClass(rdsDriver)
     ds.setJdbcUrl(rdsJdbcConnectionString)
@@ -51,6 +53,9 @@ class DatabaseManager(config: Config) {
 
           val suggestionsRow: SuggestionsRow = SuggestionsRow(1, escapeHtml4(suggestion.pageUrl), escapeHtml4(suggestion.galleryUrl), escapeHtml4(suggestion.comment), escapeHtml4(suggestion.email), "NOWY", new Timestamp(System.currentTimeMillis()), None)
           Tables.Suggestions += suggestionsRow
+          future {
+            EmailSender.send("ES - Sugestia", suggestionsRow.toString)
+          }
           suggestionsRow
       }
     }
@@ -60,8 +65,11 @@ class DatabaseManager(config: Config) {
     Try {
       db.withTransaction {
         implicit session =>
-          val issuesRow: IssuesRow = IssuesRow(1, escapeHtml4(issue.esVersion), escapeHtml4(issue.galleryUrl), escapeHtml4(issue.comment),  escapeHtml4(issue.email), "NOWY", new Timestamp(System.currentTimeMillis()), None)
+          val issuesRow: IssuesRow = IssuesRow(1, escapeHtml4(issue.esVersion), escapeHtml4(issue.galleryUrl), escapeHtml4(issue.comment), escapeHtml4(issue.email), "NOWY", new Timestamp(System.currentTimeMillis()), None)
           Tables.Issues += issuesRow
+          future {
+            EmailSender.send("ES - Problem", issuesRow.toString)
+          }
           issuesRow
       }
     }
