@@ -4,9 +4,7 @@ import init.Init
 import play.api.mvc._
 import play.api.libs.json._
 import models.{Issue, Suggestion}
-import scala.concurrent.Future
-import scala.util.Success
-import play.api.data.validation.ValidationError
+import scala.util.{Failure, Success}
 
 object ApiController extends Controller {
 
@@ -15,12 +13,12 @@ object ApiController extends Controller {
   val db = Init.dbManager
 
   def suggestions = Action {
-    val suggestions = db.suggestions.map(s => Suggestion(s.pageUrl, s.galleryUrl, s.comment, s.email, Some(s.status)))
+    val suggestions = db.suggestions.map(s => Suggestion(Some(s.id.toString), s.pageUrl, s.galleryUrl, s.comment, s.email, Some(s.status)))
     Ok(Json.toJson(suggestions))
   }
 
   def issues = Action {
-    val issues = db.issues.map(i => Issue(i.esVersion, i.galleryUrl, i.comment, i.email, Some(i.status)))
+    val issues = db.issues.map(i => Issue(Some(i.id.toString), i.esVersion, i.galleryUrl, i.comment, i.email, Some(i.status)))
     Ok(Json.toJson(issues))
   }
 
@@ -53,4 +51,21 @@ object ApiController extends Controller {
         case None => BadRequest("Cannot parse JSON as Suggestion.")
       }
   }
+
+  def deleteIssue(id: String, token: String) = Action {
+    db.deleteIssue(id, token) match {
+      case Success(true) => NoContent
+      case Success(false) => NotFound
+      case Failure(t) => InternalServerError(t.getMessage)
+    }
+  }
+
+  def deleteSuggestion(id: String, token: String) = Action {
+    db.deleteSuggestion(id, token) match {
+      case Success(true) => NoContent
+      case Success(false) => NotFound
+      case Failure(t) => InternalServerError(t.getMessage)
+    }
+  }
+
 }

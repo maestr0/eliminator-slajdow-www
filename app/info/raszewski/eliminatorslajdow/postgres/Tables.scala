@@ -19,14 +19,21 @@ trait Tables {
 
   def dropSchema()(implicit session: Session) = ddl.drop
 
-  case class SuggestionsRow(id: Long, pageUrl: String, galleryUrl: String, comment: String, email: String, status: String, createdAt: java.sql.Timestamp, deletedAt: Option[java.sql.Timestamp])
+  case class SuggestionsRow(id: Long, pageUrl: String, galleryUrl: String, comment: String, email: String, status: String, createdAt: java.sql.Timestamp, deletedAt: Option[java.sql.Timestamp]) {
+    override def toString = s"<p>$comment</p>" +
+      s"<p>$pageUrl</p>" +
+      s"<p>$galleryUrl</p>" +
+      s"<p>$email</p>" +
+      s"<p>$createdAt</p>"
+  }
+
 
   /** Table description of table alerts. Objects of this class serve as prototypes for rows in queries. */
   class Suggestions(tag: Tag) extends Table[SuggestionsRow](tag, "suggestions") {
     def * = (id, pageUrl, galleryUrl, comment, email, status, createdAt, deletedAt) <>(SuggestionsRow.tupled, SuggestionsRow.unapply)
 
     /** Maps whole row to an option. Useful for outer joins. */
-    def ? = (id.?, pageUrl.?, galleryUrl.?, comment.?, email.?,status.?, createdAt.?, deletedAt).shaped.<>({
+    def ? = (id.?, pageUrl.?, galleryUrl.?, comment.?, email.?, status.?, createdAt.?, deletedAt).shaped.<>({
       r => import r._; _1.map(_ => SuggestionsRow.tupled((_1.get, _2.get, _3.get, _4.get, _5.get, _6.get, _7.get, _8)))
     }, (_: Any) => throw new Exception("Inserting into ? projection not supported."))
 
@@ -48,7 +55,13 @@ trait Tables {
   /** Collection-like TableQuery object for table Alerts */
   lazy val Suggestions = new TableQuery(tag => new Suggestions(tag))
 
-  case class IssuesRow(id: Long, esVersion: String, galleryUrl: String, comment: String, email: String, status: String, createdAt: java.sql.Timestamp, deletedAt: Option[java.sql.Timestamp])
+  case class IssuesRow(id: Long, esVersion: String, galleryUrl: String, comment: String, email: String, status: String, createdAt: java.sql.Timestamp, deletedAt: Option[java.sql.Timestamp]) {
+    override def toString = s"<p>ES VERSION: $esVersion</p>" +
+      s"<p>$comment</p>" +
+      s"<p>$galleryUrl</p>" +
+      s"<p>$email</p>" +
+      s"<p>$createdAt</p>"
+  }
 
   /** Table description of table alerts. Objects of this class serve as prototypes for rows in queries. */
   class Issues(tag: Tag) extends Table[IssuesRow](tag, "issues") {

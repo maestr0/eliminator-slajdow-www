@@ -1,13 +1,12 @@
 package info.raszewski.eliminatorslajdow.postgres
 
 import com.jolbox.bonecp.BoneCPDataSource
-import com.typesafe.config.Config
 
 import scala.slick.driver.PostgresDriver.simple._
 import models.{Issue, Suggestion}
 import info.raszewski.eliminatorslajdow.postgres.Tables.{IssuesRow, SuggestionsRow}
 import java.sql.Timestamp
-import scala.util.Try
+import scala.util.{Failure, Try}
 import org.apache.commons.lang3.StringEscapeUtils.escapeHtml4
 import info.raszewski.eliminatorslajdow.emails.EmailSender
 import scala.concurrent._
@@ -15,9 +14,11 @@ import ExecutionContext.Implicits.global
 import play.api.Play
 
 class DatabaseManager() {
+
   val ds = new BoneCPDataSource
+  lazy val config = Play.current.configuration
+  val AdminToken = config.getString("adminToken").getOrElse("ADMIN_TOKEN")
   lazy val db = {
-    lazy val config = Play.current.configuration
     lazy val rdsJdbcConnectionString = config.getString("db.jdbc").getOrElse("")
     lazy val rdsDriver = config.getString("db.driver").getOrElse("")
     lazy val rdsUser = config.getString("db.user").getOrElse("")
@@ -59,6 +60,33 @@ class DatabaseManager() {
             EmailSender.send("ES - Sugestia", suggestionsRow.toString, suggestion.email)
           }
           suggestionsRow
+      }
+    }
+  }
+
+  def deleteIssue(id: String, adminToken: String): Try[Boolean] = {
+    Try {
+      if (AdminToken == adminToken) {
+        db.withTransaction {
+          implicit session =>
+            Tables.Issues.filter(i =>i.id === id.toLong && i.deletedAt.isEmpty).map(s => s.deletedAt).update(Some(new Timestamp(System.currentTimeMillis()))) == 1
+        }
+      }
+      else {
+        sys.error("Podaj tokeken admina")
+      }
+    }
+  }
+
+  def deleteSuggestion(id: String, adminToken: String): Try[Boolean] = {
+    Try {
+      if (AdminToken == adminToken) {
+        db.withTransaction {
+          implicit session =>
+            Tables.Suggestions.filter(i =>i.id === id.toLong && i.deletedAt.isEmpty).map(s => s.deletedAt).update(Some(new Timestamp(System.currentTimeMillis()))) == 1
+        }
+      } else {
+        sys.error("Podaj tokeken admina")
       }
     }
   }

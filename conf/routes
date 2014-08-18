@@ -9,9 +9,12 @@ GET     /oautorze                    controllers.Application.about
 
 #api
 GET     /api/suggestions                        controllers.ApiController.suggestions
-POST     /api/suggestions                        controllers.ApiController.createSuggestion
+POST     /api/suggestions                       controllers.ApiController.createSuggestion
+DELETE     /api/suggestions/:id/:adminToken     controllers.ApiController.deleteSuggestion(id: String, adminToken:String)
+
 GET     /api/issues                        controllers.ApiController.issues
 POST     /api/issues                        controllers.ApiController.createIssue
+DELETE     /api/issues/:id/:adminToken     controllers.ApiController.deleteIssue(id: String, adminToken:String)
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
