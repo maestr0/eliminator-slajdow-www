@@ -27,8 +27,8 @@ class DatabaseSpec extends FlatSpec with Matchers with MockitoSugar with BeforeA
   }
 
   override def beforeAll() = {
-    createSchema()
-    populateDatabase()
+//    createSchema()
+//    populateDatabase()
   }
 
   override def afterAll() = {

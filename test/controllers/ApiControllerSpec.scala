@@ -19,5 +19,10 @@ class ApiControllerSpec extends Specification {
       status(api) must equalTo(OK)
       contentType(api) must beSome.which(_ == "application/json")
     }
+    "return list of issues" in new WithApplication {
+      val api = route(FakeRequest(GET, "/api/issues")).get
+      status(api) must equalTo(OK)
+      contentType(api) must beSome.which(_ == "application/json")
+    }
   }
 }

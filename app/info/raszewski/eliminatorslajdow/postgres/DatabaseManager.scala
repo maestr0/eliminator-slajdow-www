@@ -6,7 +6,7 @@ import scala.slick.driver.PostgresDriver.simple._
 import models.{Issue, Suggestion}
 import info.raszewski.eliminatorslajdow.postgres.Tables.{IssuesRow, SuggestionsRow}
 import java.sql.Timestamp
-import scala.util.{Failure, Try}
+import scala.util.Try
 import org.apache.commons.lang3.StringEscapeUtils.escapeHtml4
 import info.raszewski.eliminatorslajdow.emails.EmailSender
 import scala.concurrent._
