@@ -1,17 +1,18 @@
 package info.raszewski.eliminatorslajdow.postgres
 
-import com.jolbox.bonecp.BoneCPDataSource
-
-import scala.slick.driver.PostgresDriver.simple._
-import models.{Issue, Suggestion}
-import info.raszewski.eliminatorslajdow.postgres.Tables.{IssuesRow, SuggestionsRow}
 import java.sql.Timestamp
-import scala.util.Try
-import org.apache.commons.lang3.StringEscapeUtils.escapeHtml4
+
+import com.jolbox.bonecp.BoneCPDataSource
 import info.raszewski.eliminatorslajdow.emails.EmailSender
-import scala.concurrent._
-import ExecutionContext.Implicits.global
+import info.raszewski.eliminatorslajdow.postgres.Tables.{AnnouncementRow, IssuesRow, SuggestionsRow}
+import models.{Issue, Suggestion}
+import org.apache.commons.lang3.StringEscapeUtils.escapeHtml4
 import play.api.Play
+
+import scala.concurrent.ExecutionContext.Implicits.global
+import scala.concurrent._
+import scala.slick.driver.PostgresDriver.simple._
+import scala.util.Try
 
 class DatabaseManager() {
 
@@ -49,6 +50,40 @@ class DatabaseManager() {
     }
   }
 
+  def announcements = {
+    db.withTransaction {
+      implicit session =>
+        Tables.Announcement.filter(_.deletedAt.isEmpty).list
+    }
+  }
+
+  def createAnnouncement(text: String, aType: String, adminToken: String): Try[Boolean] = {
+    Try {
+      if (AdminToken == adminToken) {
+        db.withTransaction {
+          implicit session =>
+            Tables.Announcement += AnnouncementRow(1, text, aType, None)
+            true
+        }
+      } else
+        false
+    }
+  }
+
+  def deleteAnnouncement(id: String, adminToken: String): Try[Boolean] = {
+    Try {
+      if (AdminToken == adminToken) {
+        db.withTransaction {
+          implicit session =>
+            Tables.Announcement.filter(i => i.id === id.toLong && i.deletedAt.isEmpty).map(s => s.deletedAt).update(Some(new Timestamp(System.currentTimeMillis()))) == 1
+        }
+      }
+      else {
+        sys.error("Podaj tokeken admina")
+      }
+    }
+  }
+
   def createSuggestion(suggestion: Suggestion): Try[SuggestionsRow] = {
     Try {
       db.withTransaction {
@@ -69,7 +104,7 @@ class DatabaseManager() {
       if (AdminToken == adminToken) {
         db.withTransaction {
           implicit session =>
-            Tables.Issues.filter(i =>i.id === id.toLong && i.deletedAt.isEmpty).map(s => s.deletedAt).update(Some(new Timestamp(System.currentTimeMillis()))) == 1
+            Tables.Issues.filter(i => i.id === id.toLong && i.deletedAt.isEmpty).map(s => s.deletedAt).update(Some(new Timestamp(System.currentTimeMillis()))) == 1
         }
       }
       else {
@@ -78,12 +113,42 @@ class DatabaseManager() {
     }
   }
 
+  def updateIssueStatus(id: String, newStatus: String, adminToken: String): Try[Boolean] = {
+    Try {
+      if (AdminToken == adminToken) {
+        db.withTransaction {
+          implicit session =>
+            Tables.Issues.filter(i => i.id === id.toLong && i.deletedAt.isEmpty).map(s => s.status).update(newStatus) == 1
+        }
+      }
+      else {
+        sys.error("Podaj tokeken admina")
+      }
+    }
+  }
+
+  def updateSuggestionStatus(id: String, newStatus: String, adminToken: String): Try[Boolean] = {
+    Try {
+      if (AdminToken == adminToken) {
+        db.withTransaction {
+          implicit session =>
+            Tables.Suggestions.filter(i => i.id === id.toLong && i.deletedAt.isEmpty).map(s => s.status).update(newStatus) == 1
+        }
+      }
+      else {
+        sys.error("Podaj tokeken admina")
+      }
+    }
+
+  }
+
+
   def deleteSuggestion(id: String, adminToken: String): Try[Boolean] = {
     Try {
       if (AdminToken == adminToken) {
         db.withTransaction {
           implicit session =>
-            Tables.Suggestions.filter(i =>i.id === id.toLong && i.deletedAt.isEmpty).map(s => s.deletedAt).update(Some(new Timestamp(System.currentTimeMillis()))) == 1
+            Tables.Suggestions.filter(i => i.id === id.toLong && i.deletedAt.isEmpty).map(s => s.deletedAt).update(Some(new Timestamp(System.currentTimeMillis()))) == 1
         }
       } else {
         sys.error("Podaj tokeken admina")

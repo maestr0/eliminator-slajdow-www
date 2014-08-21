@@ -84,6 +84,10 @@ code {
     margin-bottom: 20px;
 }
 
+p.list-group-item-heading {
+    word-wrap: break-word;
+}
+
 .reportIssuePanel ul, .suggestionPanel ul {
     overflow: hidden;
 }

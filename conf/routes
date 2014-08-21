@@ -8,13 +8,24 @@ GET     /kod                        controllers.Application.sourceCode
 GET     /oautorze                    controllers.Application.about
 
 #api
+GET     /api/suggestions/delete/:id/:adminToken     controllers.ApiController.deleteSuggestion(id: String, adminToken:String)
+GET     /api/suggestions/:id/:status/:adminToken     controllers.ApiController.updateSuggestionStatus(id: String, status: String, adminToken: String)
 GET     /api/suggestions                        controllers.ApiController.suggestions
 POST     /api/suggestions                       controllers.ApiController.createSuggestion
 DELETE     /api/suggestions/:id/:adminToken     controllers.ApiController.deleteSuggestion(id: String, adminToken:String)
 
+GET     /api/issues/delete/:id/:adminToken     controllers.ApiController.deleteIssue(id: String, adminToken:String)
+GET     /api/issues/:id/:status/:adminToken     controllers.ApiController.updateIssueStatus(id: String, status: String, adminToken: String)
 GET     /api/issues                        controllers.ApiController.issues
 POST     /api/issues                        controllers.ApiController.createIssue
 DELETE     /api/issues/:id/:adminToken     controllers.ApiController.deleteIssue(id: String, adminToken:String)
+
+
+#announcements
+GET     /api/announcements/create/:text/:type/:adminToken     controllers.ApiController.createAnnouncement(text: String, type: String, adminToken: String)
+GET     /api/announcements/delete/:id/:adminToken     controllers.ApiController.deleteAnnouncement(id: String, adminToken: String)
+GET     /api/announcements                  controllers.ApiController.announcements
+
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

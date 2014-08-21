@@ -1,14 +1,13 @@
 package controllers
 
 import init.Init
-import play.api.mvc._
+import models.{Announcement, Issue, Suggestion}
 import play.api.libs.json._
-import models.{Issue, Suggestion}
+import play.api.mvc._
+
 import scala.util.{Failure, Success}
 
 object ApiController extends Controller {
-
-  import scala.concurrent.ExecutionContext.Implicits.global
 
   val db = Init.dbManager
 
@@ -20,6 +19,11 @@ object ApiController extends Controller {
   def issues = Action {
     val issues = db.issues.map(i => Issue(Some(i.id.toString), i.esVersion, i.galleryUrl, i.comment, i.email, Some(i.status)))
     Ok(Json.toJson(issues))
+  }
+
+  def announcements = Action {
+    val announcements = db.announcements.map(i => Announcement(Some(i.id.toString), i.text, i.announcementType))
+    Ok(Json.toJson(announcements))
   }
 
   def createIssue = Action(parse.json) {
@@ -36,6 +40,14 @@ object ApiController extends Controller {
         case None => BadRequest("Cannot parse JSON as Issue.")
       }
   }
+
+  def createAnnouncement(text: String, aType: String, adminToken: String) = Action {
+    db.createAnnouncement(text, aType, adminToken) match {
+      case Success(true) => Created
+      case _ => InternalServerError("Cannot parse JSON as Issue.")
+    }
+  }
+
 
   def createSuggestion = Action(parse.json) {
     request =>
@@ -55,6 +67,30 @@ object ApiController extends Controller {
   def deleteIssue(id: String, token: String) = Action {
     db.deleteIssue(id, token) match {
       case Success(true) => NoContent
+      case Success(false) => NotFound
+      case Failure(t) => InternalServerError(t.getMessage)
+    }
+  }
+
+  def deleteAnnouncement(id: String, token: String) = Action {
+    db.deleteAnnouncement(id, token) match {
+      case Success(true) => NoContent
+      case Success(false) => NotFound
+      case Failure(t) => InternalServerError(t.getMessage)
+    }
+  }
+
+  def updateIssueStatus(id: String, newStatus: String, token: String) = Action {
+    db.updateIssueStatus(id, newStatus, token) match {
+      case Success(true) => Ok
+      case Success(false) => NotFound
+      case Failure(t) => InternalServerError(t.getMessage)
+    }
+  }
+
+  def updateSuggestionStatus(id: String, newStatus: String, token: String) = Action {
+    db.updateSuggestionStatus(id, newStatus, token) match {
+      case Success(true) => Ok
       case Success(false) => NotFound
       case Failure(t) => InternalServerError(t.getMessage)
     }

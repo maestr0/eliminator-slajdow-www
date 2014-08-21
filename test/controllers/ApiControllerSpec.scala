@@ -1,8 +1,6 @@
 package controllers
 
-import org.junit.runner._
 import org.specs2.mutable._
-import org.specs2.runner._
 import play.api.test.Helpers._
 import play.api.test._
 
@@ -22,6 +20,12 @@ class ApiControllerSpec extends Specification {
     "return list of issues" in new WithApplication {
       val api = route(FakeRequest(GET, "/api/issues")).get
       status(api) must equalTo(OK)
+      contentType(api) must beSome.which(_ == "application/json")
+    }
+
+    "update status on an issue" in new WithApplication {
+      val api = route(FakeRequest(GET, "/api/issues/7/nowystatus/ADMIN_TOKEN")).get
+      status(api) must equalTo(NOT_FOUND)
       contentType(api) must beSome.which(_ == "application/json")
     }
   }

@@ -89,4 +89,26 @@ trait Tables {
 
   /** Collection-like TableQuery object for table Issues */
   lazy val Issues = new TableQuery(tag => new Issues(tag))
+
+  case class AnnouncementRow(id: Long, text: String, announcementType: String, deletedAt: Option[java.sql.Timestamp])
+  /** Table description of table alerts. Objects of this class serve as prototypes for rows in queries. */
+  class Announcement(tag: Tag) extends Table[AnnouncementRow](tag, "announcements") {
+    def * = (id, text, announcementType, deletedAt) <>(AnnouncementRow.tupled, AnnouncementRow.unapply)
+
+    /** Maps whole row to an option. Useful for outer joins. */
+    def ? = (id.?, text.?, announcementType.?, deletedAt).shaped.<>({
+      r => import r._; _1.map(_ => AnnouncementRow.tupled((_1.get, _2.get, _3.get, _4)))
+    }, (_: Any) => throw new Exception("Inserting into ? projection not supported."))
+
+    /** Database column id AutoInc, PrimaryKey */
+    val id: Column[Long] = column[Long]("id", O.AutoInc, O.PrimaryKey)
+    /** Database column page_url  */
+    val text: Column[String] = column[String]("text")
+    val announcementType: Column[String] = column[String]("announcement_type")
+    /** Database column deleted_at  */
+    val deletedAt: Column[Option[java.sql.Timestamp]] = column[Option[java.sql.Timestamp]]("deleted_at")
+  }
+
+  /** Collection-like TableQuery object for table Announcement */
+  lazy val Announcement = new TableQuery(tag => new Announcement(tag))
 }
