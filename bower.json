@@ -1,24 +1,24 @@
 {
-  "name": "eliminator-slajdow-www",
-  "version": "0.0.1",
-  "homepage": "https://github.com/maestr0/eliminator-slajdow-www",
-  "authors": [
-    "Pawel Raszewski <raszewski@gmail.com>"
-  ],
-  "description": "Eliminator Slajdow - strona www",
-  "keywords": [
-    "eliminator",
-    "slajdow"
-  ],
-  "license": "MIT",
-  "private": true,
-  "ignore": [
-    "**/.*",
-    "node_modules",
-    "bower_components",
-    "test",
-    "tests"
-  ],
-  "dependencies": {
-  }
+    "name": "eliminator-slajdow-www",
+    "version": "0.0.1",
+    "homepage": "https://github.com/maestr0/eliminator-slajdow-www",
+    "authors": [
+        "Pawel Raszewski <raszewski@gmail.com>"
+    ],
+    "description": "Eliminator Slajdow - strona www",
+    "keywords": [
+        "eliminator",
+        "slajdow"
+    ],
+    "license": "MIT",
+    "private": true,
+    "ignore": [
+        "**/.*",
+        "node_modules",
+        "bower_components",
+        "test",
+        "tests"
+    ],
+    "dependencies": {
+    }
 }

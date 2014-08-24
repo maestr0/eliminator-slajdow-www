@@ -20,6 +20,10 @@
           });
 })
 
+$(".alert-dismissible button.close").click(function(){
+        ga('send', 'event', 'close-alert', 'click', 'close-donation-alert');
+});
+
 $("#addIssue").click(function(){
   $.ajax({
     beforeSend: function(xhrObj){
