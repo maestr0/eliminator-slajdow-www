@@ -1,5 +1,7 @@
 package info.raszewski.eliminatorslajdow.postgres
 
+import play.api.Play
+
 // AUTO-GENERATED Slick data model
 /** Stand-alone Slick data model for immediate use */
 object Tables extends {
@@ -9,6 +11,8 @@ object Tables extends {
 /** Slick data model trait for extension, choice of backend or usage in the cake pattern. (Make sure to initialize this late.) */
 trait Tables {
   val profile: scala.slick.driver.JdbcProfile
+
+  val adminToken = Play.current.configuration.getString("adminToken").getOrElse("ADMIN_TOKEN")
 
   import profile.simple._
 
@@ -21,10 +25,11 @@ trait Tables {
 
   case class SuggestionsRow(id: Long, pageUrl: String, galleryUrl: String, comment: String, email: String, status: String, createdAt: java.sql.Timestamp, deletedAt: Option[java.sql.Timestamp]) {
     override def toString = s"<p>$comment</p>" +
-      s"<p>$pageUrl</p>" +
       s"<p>$galleryUrl</p>" +
       s"<p>$email</p>" +
-      s"<p>$createdAt</p>"
+      s"<p>$createdAt</p>" +
+      s"<a href='http://eliminator-slajdow.herokuapp.com/api/suggestions/delete/$id/$adminToken'>Usun</a><br />" +
+      s"<a href='http://eliminator-slajdow.herokuapp.com/api/suggestions/$id/ZAAKCEPTOWANO/$adminToken'>Status - Zaakceptowano</a>"
   }
 
 
@@ -60,7 +65,9 @@ trait Tables {
       s"<p>$comment</p>" +
       s"<p>$galleryUrl</p>" +
       s"<p>$email</p>" +
-      s"<p>$createdAt</p>"
+      s"<p>$createdAt</p>" +
+      s"<a href='http://eliminator-slajdow.herokuapp.com/api/issues/delete/$id/$adminToken'>Usun</a><br />" +
+      s"<a href='http://eliminator-slajdow.herokuapp.com/api/issues/$id/ZAAKCEPTOWANO/$adminToken'>Status - Zaakceptowano</a>"
   }
 
   /** Table description of table alerts. Objects of this class serve as prototypes for rows in queries. */
