@@ -16,4 +16,8 @@ object Application extends Controller {
     Ok(views.html.index("about"))
   }
 
+  def donation = Action {
+    Ok(views.html.index("donation"))
+  }
+
 }

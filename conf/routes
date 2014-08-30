@@ -6,6 +6,7 @@
 GET     /                           controllers.Application.index
 GET     /kod                        controllers.Application.sourceCode
 GET     /oautorze                    controllers.Application.about
+GET     /darowizna                    controllers.Application.donation
 
 #api
 GET     /api/suggestions/delete/:id/:adminToken     controllers.ApiController.deleteSuggestion(id: String, adminToken:String)
