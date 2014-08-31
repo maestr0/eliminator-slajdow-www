@@ -32,7 +32,7 @@ $("#addIssue").click(function () {
         },
         type: "POST",
         url: "/api/issues",
-        data: JSON.stringify({"email": $('#issueModal #issue_email').val(), "comment": $('#issueModal #issue_comment').val(), "esVersion": $('#issue_es_version').val() + "\nUA:" + navigator.userAgent, "galleryUrl": $('#issueModal #issue_gallery_url').val()}),
+        data: JSON.stringify({"email": $('#issueModal #issue_email').val(), "comment": $('#issueModal #issue_comment').val(), "esVersion": $('#issue_es_version').val(), "galleryUrl": $('#issueModal #issue_gallery_url').val()}),
         success: function (data) {
             $('#issueModal').modal('hide');
             $(".reportIssuePanel ul").prepend(data);
