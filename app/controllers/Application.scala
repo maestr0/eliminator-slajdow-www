@@ -1,6 +1,8 @@
 package controllers
 
+import play.api.Play
 import play.api.mvc._
+import play.api.Play.current
 
 object Application extends Controller {
 
@@ -18,6 +20,15 @@ object Application extends Controller {
 
   def donation = Action {
     Ok(views.html.index("donation"))
+  }
+
+  def safariExtension = Action { implicit response =>
+    val app = Play.application
+    val file = Play.application.getFile("public/safari/eliminator-slajdow.safariextz")
+    val source = scala.io.Source.fromFile(file)(scala.io.Codec.ISO8859)
+    val byteArray = source.map(_.toByte).toArray
+    source.close()
+    Ok(byteArray).as("application/octet-stream")
   }
 
 }

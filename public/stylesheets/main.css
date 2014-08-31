@@ -64,7 +64,8 @@ code {
 }
 
 .button.add {
-    width: 200px;
+    width: 250px;
+    margin: 20px 0;
 }
 
 .page_sourceCode .container img {

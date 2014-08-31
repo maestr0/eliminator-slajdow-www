@@ -1,28 +1,38 @@
-<img src='@routes.Assets.at("images/firefox_icon.png")' alt="Donate Bitcoin" width="50">
 <a type="button" class="disabled btn btn-success button  prominent  add installer"
    data-hash="sha256:1733d384f8a1b14d324c9c000bf830487e2078821a27e9ba918a8a2c6b152c19"
    href="https://addons.mozilla.org/firefox/downloads/latest/412518/addon-412518-latest.xpi?src=eliminator-slajdow.herokuapp.com"
    id="ff-install-button" onclick="ga('send', 'event', 'button', 'click', 'installFirefox');">
+    <img src='@routes.Assets.at("images/firefox_icon.png")' alt="Dodaj do Firefox" width="50">
     <span class="glyphicon glyphicon-plus"></span> Dodaj do Firefox
 </a>
+
+<a type="button" class="disabled btn btn-success button  prominent  add installer"
+   data-hash="sha256:1733d384f8a1b14d324c9c000bf830487e2078821a27e9ba918a8a2c6b152c19"
+   href="/eliminator-slajdow-safari"
+   id="safari-install-button" onclick="ga('send', 'event', 'button', 'click', 'installSafari');">
+    <img src='@routes.Assets.at("images/safari_icon.png")' alt="Dodaj do Safari" width="50">
+    <span class="glyphicon glyphicon-plus"></span> Dodaj do Safari
+</a>
+
 <p>
-
-    <img src='@routes.Assets.at("images/chrome_icon.png")' alt="Donate Bitcoin" width="50">
-
-
     <button type="button" class="btn disabled btn-success add button"
             onclick="chrome.webstore.install();ga('send', 'event', 'button', 'click', 'installChrome');;"
-            id="chrome-install-button"><span class="glyphicon glyphicon-plus"></span> Dodaj do Chrome
+            id="chrome-install-button">
+        <img src='@routes.Assets.at("images/chrome_icon.png")' alt="Dodaj do Chrome" width="50">
+        <span class="glyphicon glyphicon-plus"></span> Dodaj do Chrome
     </button>
-    <script>
-        if (navigator.userAgent.match(/Chrome/i)) {
-            $("#chrome-install-button").removeClass("disabled");
-        } else if (navigator.userAgent.match(/Firefox/i)) {
-            $("#ff-install-button").removeClass("disabled");
-        }
-
-    </script>
 </p>
+
+<script>
+    if (navigator.userAgent.match(/Chrome/i)) {
+        $("#chrome-install-button").removeClass("disabled");
+    } else if (navigator.userAgent.match(/Firefox/i)) {
+        $("#ff-install-button").removeClass("disabled");
+    } else if (navigator.userAgent.match(/Safari/i)) {
+        $("#safari-install-button").removeClass("disabled");
+    }
+
+</script>
 
 <div class="gplus">
     <!-- Place this tag in your head or just before your close body tag. -->

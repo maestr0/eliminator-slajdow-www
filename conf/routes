@@ -8,6 +8,8 @@ GET     /kod                        controllers.Application.sourceCode
 GET     /oautorze                    controllers.Application.about
 GET     /darowizna                    controllers.Application.donation
 
+GET     /eliminator-slajdow-safari               controllers.Application.safariExtension
+
 #api
 GET     /api/suggestions/delete/:id/:adminToken     controllers.ApiController.deleteSuggestion(id: String, adminToken:String)
 GET     /api/suggestions/:id/:status/:adminToken     controllers.ApiController.updateSuggestionStatus(id: String, status: String, adminToken: String)
