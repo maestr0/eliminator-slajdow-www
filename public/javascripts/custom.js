@@ -6,7 +6,7 @@ $("#addSuggestion").click(function () {
         },
         type: "POST",
         url: "/api/suggestions",
-        data: JSON.stringify({"email": $('#suggestionModal #email').val(), "comment": $('#suggestionModal #comment').val(), "pageUrl": navigator.userAgent, "galleryUrl": $('#suggestionModal #gallery_url').val()}),
+        data: JSON.stringify({"email": $('#suggestionModal #email').val(), "comment": $('#suggestionModal #comment').val(), "pageUrl": "N/A", "ua": navigator.userAgent, "galleryUrl": $('#suggestionModal #gallery_url').val()}),
         success: function (data) {
             $('#suggestionModal').modal('hide');
             $(".suggestionsPanel ul").prepend(data);
@@ -32,7 +32,7 @@ $("#addIssue").click(function () {
         },
         type: "POST",
         url: "/api/issues",
-        data: JSON.stringify({"email": $('#issueModal #issue_email').val(), "comment": $('#issueModal #issue_comment').val(), "esVersion": $('#issue_es_version').val(), "galleryUrl": $('#issueModal #issue_gallery_url').val()}),
+        data: JSON.stringify({"email": $('#issueModal #issue_email').val(), "comment": $('#issueModal #issue_comment').val(), "esVersion": $('#issue_es_version').val(), "ua": navigator.userAgent, "galleryUrl": $('#issueModal #issue_gallery_url').val()}),
         success: function (data) {
             $('#issueModal').modal('hide');
             $(".reportIssuePanel ul").prepend(data);

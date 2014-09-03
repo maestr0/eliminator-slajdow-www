@@ -6,7 +6,6 @@ import com.jolbox.bonecp.BoneCPDataSource
 import info.raszewski.eliminatorslajdow.emails.EmailSender
 import info.raszewski.eliminatorslajdow.postgres.Tables.{AnnouncementRow, IssuesRow, SuggestionsRow}
 import models.{Issue, Suggestion}
-import org.apache.commons.lang3.StringEscapeUtils.escapeHtml4
 import play.api.Play
 
 import scala.concurrent.ExecutionContext.Implicits.global
@@ -88,11 +87,10 @@ class DatabaseManager() {
     Try {
       db.withTransaction {
         implicit session =>
-
-          val suggestionsRow: SuggestionsRow = SuggestionsRow(1, escapeHtml4(suggestion.pageUrl), escapeHtml4(suggestion.galleryUrl), escapeHtml4(suggestion.comment), escapeHtml4(suggestion.email), "NOWY", new Timestamp(System.currentTimeMillis()), None)
-          Tables.Suggestions += suggestionsRow
+          val suggestionsRow: SuggestionsRow = SuggestionsRow(1, suggestion.pageUrl, suggestion.galleryUrl, suggestion.userAgent, suggestion.comment, suggestion.email, "NOWY", new Timestamp(System.currentTimeMillis()), None)
+          val newRow = Tables.Suggestions returning Tables.Suggestions += suggestionsRow
           future {
-            EmailSender.send("ES - Sugestia", suggestionsRow.toString, suggestion.email)
+            EmailSender.sendCreateSuggestionNotification(newRow)
           }
           suggestionsRow
       }
@@ -160,10 +158,10 @@ class DatabaseManager() {
     Try {
       db.withTransaction {
         implicit session =>
-          val issuesRow: IssuesRow = IssuesRow(1, escapeHtml4(issue.esVersion), escapeHtml4(issue.galleryUrl), escapeHtml4(issue.comment), escapeHtml4(issue.email), "NOWY", new Timestamp(System.currentTimeMillis()), None)
-          Tables.Issues += issuesRow
+          val issuesRow: IssuesRow = IssuesRow(1, issue.esVersion, issue.galleryUrl, issue.userAgent, issue.comment, issue.email, "NOWY", new Timestamp(System.currentTimeMillis()), None)
+          val newRow = Tables.Issues returning Tables.Issues += issuesRow
           future {
-            EmailSender.send("ES - Problem", issuesRow.toString, issue.email)
+            EmailSender.sendCreateIssueNotification(newRow)
           }
           issuesRow
       }

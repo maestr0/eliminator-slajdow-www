@@ -12,12 +12,12 @@ object ApiController extends Controller {
   val db = Init.dbManager
 
   def suggestions = Action {
-    val suggestions = db.suggestions.map(s => Suggestion(Some(s.id.toString), s.pageUrl, s.galleryUrl, s.comment, s.email, Some(s.status)))
+    val suggestions = db.suggestions.map(s => Suggestion(Some(s.id.toString), s.pageUrl, s.galleryUrl, s.userAgent, s.comment, s.email, Some(s.status)))
     Ok(Json.toJson(suggestions))
   }
 
   def issues = Action {
-    val issues = db.issues.map(i => Issue(Some(i.id.toString), i.esVersion, i.galleryUrl, i.comment, i.email, Some(i.status)))
+    val issues = db.issues.map(i => Issue(Some(i.id.toString), i.esVersion, i.galleryUrl, i.userAgent, i.comment, i.email, Some(i.status)))
     Ok(Json.toJson(issues))
   }
 
