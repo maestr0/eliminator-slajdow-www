@@ -34,7 +34,7 @@ object EmailSender {
       s"<p>${issue.galleryUrl}</p>" +
       s"<p>${issue.email}</p>" +
       s"<p>${issue.createdAt}</p>" +
-      s"<a href='http://eliminator-slajdow.herokuapp.com/'>ES HP</a>" +
+      s"<a href='http://eliminator-slajdow.herokuapp.com/'>ES HP</a><br />" +
       s"<a href='http://eliminator-slajdow.herokuapp.com/api/issues/delete/${issue.id}/$adminToken'>Usun</a><br />" +
       s"<a href='http://eliminator-slajdow.herokuapp.com/api/issues/${issue.id}/ZAAKCEPTOWANO/$adminToken'>Status - Zaakceptowano</a>"
 
@@ -46,7 +46,7 @@ object EmailSender {
       s"<p>${suggestion.galleryUrl}</p>" +
       s"<p>${suggestion.email}</p>" +
       s"<p>${suggestion.createdAt}</p>" +
-      s"<a href='http://eliminator-slajdow.herokuapp.com/'>ES HP</a>" +
+      s"<a href='http://eliminator-slajdow.herokuapp.com/'>ES HP</a><br />" +
       s"<a href='http://eliminator-slajdow.herokuapp.com/api/suggestions/delete/${suggestion.id}/$adminToken'>Usun</a><br />" +
       s"<a href='http://eliminator-slajdow.herokuapp.com/api/suggestions/${suggestion.id}/ZAAKCEPTOWANO/$adminToken'>Status - Zaakceptowano</a>"
 
