@@ -1,6 +1,16 @@
-@(s: info.raszewski.eliminatorslajdow.postgres.Tables.SuggestionsRow)
+@(s: info.raszewski.eliminatorslajdow.postgres.Tables.SuggestionsRow)(implicit request: play.api.mvc.RequestHeader)
 <li class="list-group-item">
     <p class="list-group-item-heading"><a href="@s.galleryUrl">@s.galleryUrl</a></p>
     <p class="list-group-item-heading">@s.comment</p>
     <p class="list-group-item-text">Status: <span class="label label-warning">@s.status</span></p>
+    @if(request.cookies.get("admin").nonEmpty || request.queryString.get("token").nonEmpty) {
+    <div class="row">
+        <div class="col-md-2">
+            <a type="button" class="btn btn-danger" href='http://eliminator-slajdow.herokuapp.com/api/suggestions/delete/@s.id/@(if (request.cookies.get("admin")) request.cookies.get("admin") else  request.queryString.get("token"))'>Usuń</a>
+        </div>
+        <div class="col-md-2">
+            <a type="button" class="btn btn-info" href='http://eliminator-slajdow.herokuapp.com/api/suggestions/@s.id/ZAAKCEPTOWANO/@(if (request.cookies.get("admin")) request.cookies.get("admin") else  request.queryString.get("token"))'>Status ZAAKCEPTOWANO</a>
+        </div>
+    </div>
+    }
 </li>

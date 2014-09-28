@@ -27,7 +27,7 @@ object ApiController extends Controller {
   }
 
   def createIssue = Action(parse.json) {
-    request =>
+    implicit request =>
       request.body.asOpt[Issue] match {
         case Some(issue) =>
           if (issue.comment.isEmpty || issue.galleryUrl.isEmpty)
@@ -50,7 +50,7 @@ object ApiController extends Controller {
 
 
   def createSuggestion = Action(parse.json) {
-    request =>
+    implicit request =>
       request.body.asOpt[Suggestion] match {
         case Some(suggestion) =>
           if (suggestion.pageUrl.isEmpty || suggestion.galleryUrl.isEmpty)

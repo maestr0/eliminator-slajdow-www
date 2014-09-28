@@ -1,28 +1,32 @@
 package controllers
 
 import play.api.Play
-import play.api.mvc._
 import play.api.Play.current
+import play.api.mvc._
 
 object Application extends Controller {
 
-  def index = Action {
+  def index = Action { implicit request: RequestHeader =>
     Ok(views.html.index())
   }
 
-  def sourceCode = Action {
+  def sourceCode = Action { implicit request =>
     Ok(views.html.index("sourceCode"))
   }
 
-  def about = Action {
+  def about = Action { implicit request =>
     Ok(views.html.index("about"))
   }
 
-  def donation = Action {
+  def donation = Action { implicit request =>
     Ok(views.html.index("donation"))
   }
 
-  def safariExtension = Action { implicit response =>
+  def admin = Action { implicit request =>
+    Ok(views.html.index("donation"))
+  }
+
+  def safariExtension = Action { implicit request =>
     val app = Play.application
     val file = Play.application.getFile("public/safari/eliminator-slajdow.safariextz")
     val source = scala.io.Source.fromFile(file)(scala.io.Codec.ISO8859)
