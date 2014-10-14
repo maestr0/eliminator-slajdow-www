@@ -13,6 +13,7 @@ object Global extends GlobalSettings {
   }
 
   override def onStop(app: Application) {
+    Init.dbManager.closeDataSource
     Logger.info("Application shutdown...")
   }
 

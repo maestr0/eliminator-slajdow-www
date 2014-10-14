@@ -21,7 +21,38 @@
         <img src='@routes.Assets.at("images/chrome_icon.png")' alt="Dodaj do Chrome" width="50">
         <span class="glyphicon glyphicon-plus"></span> Dodaj do Chrome
     </button>
+
+    <button type="button" class="btn btn-success add button" data-toggle="modal" data-target="#operaInstall"
+            onclick="ga('send', 'event', 'button', 'click', 'installOpera');;"
+            id="opera-install-button">
+        <img src='@routes.Assets.at("images/opera_icon.png")' alt="Dodaj do Opery" height="50">
+        <span class="glyphicon glyphicon-plus"></span> Dodaj do Opery
+    </button>
 </p>
+
+<div class="modal fade" id="operaInstall" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span
+                        class="sr-only">Zamknij</span></button>
+                <h4 class="modal-title" id="myModalLabel">Eliminator Slajdów dla przeglądarki Opera</h4>
+            </div>
+            <div class="modal-body">
+                <p>ES nie będzie oficjalnie wspierany dla Opery ponieważ po prostu nie mam czasu się tym zajmować. <strong>Jednak podobno na Operze można instalować dodatki z Chrome.</strong></p>
+                <p>Aby zainstalować ES na Operze trzeba najpierw zainstalować dodatek <a href="https://addons.opera.com/pl/extensions/details/download-chrome-extension-9/?display=pl" target="_blank">Download Chrome Extension</a>.
+                    Potem za jego pomocą można zainstalować ES z <a href="https://chrome.google.com/webstore/detail/eliminator-slajd%C3%B3w/eplekpmdodlgejgogbojajncdlapamff?hl=pl&utm_source=chrome-ntp-launcher" target="_blank">Chrome Web Store</a>
+                </p>
+                <h2>UWAGA. Ja osobiście tego nie testowałem i nie udzielam żadnych porad w tym zakresie.</h2>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Ok</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <script>
     if (navigator.userAgent.match(/Chrome/i)) {
@@ -30,6 +61,8 @@
         $("#ff-install-button").removeClass("disabled");
     } else if (navigator.userAgent.match(/Safari/i)) {
         $("#safari-install-button").removeClass("disabled");
+    } else if (navigator.userAgent.match(/Opera/i)) {
+        $("#opera-install-button").removeClass("disabled");
     }
 
 </script>

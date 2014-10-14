@@ -35,6 +35,8 @@ class DatabaseManager() {
     database
   }
 
+  def closeDataSource = ds.close()
+
   def suggestions = {
     db.withTransaction {
       implicit session =>
