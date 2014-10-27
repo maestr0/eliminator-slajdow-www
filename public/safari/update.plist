@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+    <dict>
+        <key>Extension Updates</key>
+        <array>
+            <dict>
+                <key>CFBundleIdentifier</key>
+                <string>info.raszewski.eliminator-slajdow</string>
+                <key>Developer Identifier</key>
+                <string>6K4U9C52E5</string>
+                <key>CFBundleVersion</key>
+                <string>1</string>
+                <key>CFBundleShortVersionString</key>
+                <string>3.1.33</string>
+                <key>URL</key>
+                <string>http://eliminator-slajdow.herokuapp.com/assets/safari/eliminator-slajdow.safariextz</string>
+            </dict>
+        </array>
+    </dict>
+</plist>
