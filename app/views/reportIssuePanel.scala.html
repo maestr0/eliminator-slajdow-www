@@ -4,7 +4,7 @@
 <p>Jeżeli ES nie działa poprawnie na jakiejś stronie, zgłoś to abym mógł zrobić poprawkę.</p>
 
 <p>
-    <button type="button" data-toggle="modal" data-target="#issueModal" class="btn btn-danger"><span
+    <button type="button" data-toggle="modal" data-target="#issueModal" class="btn btn-danger btn-lg"><span
             class="glyphicon glyphicon-warning-sign"></span> Zgłoś Błąd
     </button>
 </p>
@@ -43,15 +43,22 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Anuluj</button>
                 <button id="addIssue" type="button" class="btn btn-danger "><span
-                        class="glyphicon glyphicon-warning-sign"></span> Zgłoś Błąd
+                        class="glyphicon glyphicon-warning-sign"></span> Zgłoś Problem
                 </button>
             </div>
         </div>
     </div>
 </div>
-<h2>Zgłoszone problemy</h2>
-<ul class="list-group">
-    @for(i <- init.Init.dbManager.issues) {
-        @issue(i)
-    }
-</ul>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">Zgłoszone problemy</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="list-group">
+            @for(i <- init.Init.dbManager.issues) {
+                @issue(i)
+            }
+        </ul>
+    </div>
+</div>
+

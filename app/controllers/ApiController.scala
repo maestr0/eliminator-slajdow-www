@@ -64,7 +64,18 @@ object ApiController extends Controller {
       }
   }
 
+  def deleteIssueWithAdminCookie(id: String) = Action { request =>
+    request.cookies.get("admin") match {
+      case Some(cookie) => deleteIssueFromDb(id, cookie.value)
+      case None => Forbidden
+    }
+  }
+
   def deleteIssue(id: String, token: String) = Action {
+    deleteIssueFromDb(id, token)
+  }
+
+  def deleteIssueFromDb(id: String, token: String): SimpleResult = {
     db.deleteIssue(id, token) match {
       case Success(true) => NoContent
       case Success(false) => NotFound

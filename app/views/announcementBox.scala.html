@@ -1,6 +1,6 @@
 @for(a <- init.Init.dbManager.announcements) {
     <div class="alert alert-@{a.announcementType}" role="alert">
         <h1>Uwaga!</h1>
-        <p class="announcement">@a.text</p>
+        <p class="announcement">@Html(a.text)</p>
     </div>
 }

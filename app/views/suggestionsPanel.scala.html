@@ -4,7 +4,7 @@
 <p>Jeżeli Twoja propozycja będzie popularna to zostanie w pierwszej kolejności dodana do ES.</p>
 
 <p>
-    <button data-toggle="modal" data-target="#suggestionModal" type="button" class="btn btn-primary"><span
+    <button data-toggle="modal" data-target="#suggestionModal" type="button" class="btn-lg btn btn-primary"><span
             class="glyphicon glyphicon-plus"></span> Dodaj nowy Portal
     </button>
 </p>
@@ -17,7 +17,7 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span
                         class="sr-only">Zamknij</span></button>
-                <h4 class="modal-title" id="myModalLabel">Dodaj nową sugestię</h4>
+                <h4 class="modal-title" id="myModalLabel">Nowa Sugestia</h4>
             </div>
             <div class="modal-body">
                 <form role="form" method="post" src>
@@ -45,10 +45,15 @@
         </div>
     </div>
 </div>
-
-<h2>Sugestie</h2>
-<ul class="list-group">
-    @for(s <- init.Init.dbManager.suggestions){
-    @suggestion(s)
-    }
-</ul>
+<div class="panel panel-default">
+<div class="panel-heading">
+    <h3 class="panel-title">Sugestie</h3>
+</div>
+<div class="panel-body">
+    <ul class="list-group">
+        @for(s <- init.Init.dbManager.suggestions){
+            @suggestion(s)
+        }
+    </ul>
+</div>
+</div>
