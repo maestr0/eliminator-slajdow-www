@@ -28,6 +28,13 @@
         <img src='@routes.Assets.at("images/opera_icon.png")' alt="Dodaj do Opery" height="50">
         <span class="glyphicon glyphicon-plus"></span> Dodaj do Opery
     </button>
+
+    <button type="button" class="btn btn-success add button" data-toggle="modal" data-target="#usInstall"
+            onclick="ga('send', 'event', 'button', 'click', 'installUs');;"
+            id="us-install-button">
+        <img src='@routes.Assets.at("images/greasemonkey.png")' alt="Dodaj jako User Script" height="50">
+        <span class="glyphicon glyphicon-plus"></span> Dodaj jako User Script
+    </button>
 </p>
 
 <div class="modal fade" id="operaInstall" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
@@ -45,6 +52,28 @@
                     Potem za jego pomocą można zainstalować ES z <a href="https://chrome.google.com/webstore/detail/eliminator-slajd%C3%B3w/eplekpmdodlgejgogbojajncdlapamff?hl=pl&utm_source=chrome-ntp-launcher" target="_blank">Chrome Web Store</a>
                 </p>
                 <h2>UWAGA. Ja osobiście tego nie testowałem i nie udzielam żadnych porad w tym zakresie.</h2>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Ok</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="usInstall" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span
+                        class="sr-only">Zamknij</span></button>
+                <h4 class="modal-title" id="myModalLabel">Eliminator Slajdów jako Greasemonkey userscript</h4>
+            </div>
+            <div class="modal-body">
+                <p>ES w formie Greasemonkey nie jest oficjalnie wspierany ale działa dość dobrze. <strong>Nie działa natomiast automatyczna aktualizacja skryptu więc trzeba co jakiś czas zaglądać samemu na Githuba i pobierać najnowszą wersję ES.</strong></p>
+                <p>Skrypt jest dostępny tutaj: <a href="https://github.com/maestr0/eliminator-slajdow-chrome/blob/master/userscript/eliminator-slajdow.user.js" target="_blank">https://github.com/maestr0/eliminator-slajdow-chrome/blob/master/userscript/eliminator-slajdow.user.js</a>
+                </p>
+                <h2>UWAGA. Ja osobiście tego nie testowałem i nie udzielam żadnych porad w zakresie instalacji i działania User Scriptów.</h2>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Ok</button>
