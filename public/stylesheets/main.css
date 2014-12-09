@@ -108,3 +108,14 @@ p.list-group-item-heading {
         width: 300px;
     }
 }
+
+.issues .ZAAKCEPTOWANO {
+    background: url('../images/gears.svg') no-repeat;
+    width: 50px;
+    height: 50px;
+    float: right;
+    top: -32px;
+    background-size: 50px 50px;
+    position: relative;
+    left: 6px;
+}

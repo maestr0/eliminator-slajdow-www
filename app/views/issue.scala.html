@@ -4,10 +4,11 @@
 
     <p class="list-group-item-heading"><a href="@i.galleryUrl">@i.galleryUrl</a></p>
 
-    <p class="list-group-item-text">Wersja: <span class="label label-primary">@i.esVersion</span> Status: <span
-            class="label label-warning">@i.status</span></p>
-
-    <br/>
+    <p class="list-group-item-text">Wersja: <span class="label label-primary">@i.esVersion</span>
+        </br>
+        Status: <span class="label label-warning">@i.status</span>
+        <span class="@i.status"></span>
+    </p>
     @if(request.cookies.get("admin").nonEmpty || request.queryString.get("token").nonEmpty) {
         <div class="row">
             <div class="col-md-2">
