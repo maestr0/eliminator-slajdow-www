@@ -42,12 +42,40 @@ body {
     text-align: center;
 }
 
-#footer .container ul {
+#footer {
     margin-bottom: 0;
     margin-top: 5px;
+    text-align: center;
 }
 
-#footer .container .row {
+.mdl-cell.githubTop {
+    text-align: center;
+    margin-top: 50px;
+}
+
+.mdl-cell.center {
+    text-align: center;
+}
+
+.issue-list li {
+    text-align: left;
+}
+
+.issue-list .version {
+    width:150px;
+}
+
+.issue-list .status {
+    width:150px;
+}
+
+.issue-list .url {
+    width:150px;
+}
+.issue-list .comment {
+}
+
+#footer {
     margin-top: 13px;
 }
 
@@ -64,8 +92,9 @@ code {
 }
 
 .button.add {
-    width: 250px;
+    width: 100%;
     margin: 20px 0;
+    float: left;
 }
 
 .page_sourceCode .container img {
@@ -118,4 +147,9 @@ p.list-group-item-heading {
     background-size: 50px 50px;
     position: relative;
     left: 6px;
+}
+
+header .mdl-navigation__link.is-active {
+    background: white;
+    color: black;
 }

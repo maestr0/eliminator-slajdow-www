@@ -1,22 +1,8 @@
 @(pageName: String)
-<div class="navbar navbar-default navbar-fixed-top">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <span class="navbar-logo"></span>
-            <a class="navbar-brand" href="/">Eliminator Slajdów</a>
-        </div>
-        <div class="collapse navbar-collapse">
-            <ul class="nav navbar-nav">
-                <li class='@{if(pageName=="start") "active" else ""}'><a href="/">Start</a></li>
-                <li class='@{if(pageName=="sourceCode") "active" else ""}'><a href="/kod">Kod źródłowy ES</a></li>
-                <li class='@{if(pageName=="about") "active" else ""}'><a href="/oautorze">O autorze</a></li>
-            </ul>
-        </div>
-        <!--/.nav-collapse -->
-    </div>
-</div>
+<nav class="mdl-navigation mdl-layout--large-screen-only">
+    <a class="mdl-navigation__link @{if(pageName=="start") "is-active" else ""}" href="/">Start</a>
+    <a class="mdl-navigation__link @{if(pageName=="newIssue") "is-active" else ""}" href="/problem/nowy">Zgłoś problem</a>
+    <a class="mdl-navigation__link @{if(pageName=="issues") "is-active" else ""}" href="/problemy">Zgłoszone problemy</a>
+    <a class="mdl-navigation__link @{if(pageName=="sourceCode") "is-active" else ""}" href="/kod">Kod źródłowy ES</a>
+    <a class="mdl-navigation__link @{if(pageName=="about") "is-active" else ""}" href="/oautorze">O autorze</a>
+</nav>

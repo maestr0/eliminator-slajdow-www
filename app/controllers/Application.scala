@@ -10,6 +10,14 @@ object Application extends Controller {
     Ok(views.html.index())
   }
 
+  def issues = Action { implicit request =>
+    Ok(views.html.index("issues"))
+  }
+
+  def newIssue = Action { implicit request =>
+    Ok(views.html.index("newIssue"))
+  }
+
   def sourceCode = Action { implicit request =>
     Ok(views.html.index("sourceCode"))
   }

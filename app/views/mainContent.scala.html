@@ -1,14 +1,19 @@
 @()(implicit request: play.api.mvc.RequestHeader)
 <div class="row">
-    @infoBox()
-</div>
-<div class="row">
-    @donationBox()
-</div>
-<div class="row">
     @announcementBox()
 </div>
-<div class="row clearfix">
-    <div class="col-md-8 column reportIssuePanel">@reportIssuePanel()</div>
-    <div class="col-md-4 column installPanel">@installPanel()</div>
+
+<div class="mdl-grid">
+    <div class="mdl-cell mdl-cell--2-col"></div>
+    <div class="mdl-cell mdl-cell--4-col">@infoBox()</div>
+    <div class="mdl-cell mdl-cell--4-col">@donationBox()</div>
+    <div class="mdl-cell mdl-cell--2-col"></div>
+</div>
+<div class="mdl-grid">
+    <div class="mdl-cell mdl-cell--2-col"></div>
+    <div class="mdl-cell mdl-cell--4-col">@installPanel()</div>
+    <div class="mdl-cell mdl-cell--4-col">
+        <div class="fb-like-box" data-href="https://www.facebook.com/eliminator.slajdow" data-colorscheme="light"
+    data-show-faces="true" data-header="true" data-stream="false" data-show-border="true"></div>
+    </div>
 </div>

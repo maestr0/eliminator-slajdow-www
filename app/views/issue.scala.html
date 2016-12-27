@@ -1,22 +1,23 @@
 @(i: info.raszewski.eliminatorslajdow.postgres.Tables.IssuesRow)(implicit request: play.api.mvc.RequestHeader)
-<li class="list-group-item">
-    <p class="list-group-item-heading">@i.comment</p>
+<li class="mdl-list__item">
+    <span class="mdl-list__item-primary-content comment">
+        <p class="commentContent">@i.comment</p><br/>
+        <a href="@i.galleryUrl">URL</a>
+    </span>
+    <span class="mdl-list__item-secondary-action version">
+    @i.esVersion
+    </span>
 
-    <p class="list-group-item-heading"><a href="@i.galleryUrl">@i.galleryUrl</a></p>
-
-    <p class="list-group-item-text">Wersja: <span class="label label-primary">@i.esVersion</span>
-        </br>
+    <span class="mdl-list__item-secondary-action status">
         Status: <span class="label label-warning">@i.status</span>
         <span class="@i.status"></span>
-    </p>
+    </span>
+
+
     @if(request.cookies.get("admin").nonEmpty || request.queryString.get("token").nonEmpty) {
-        <div class="row">
-            <div class="col-md-2">
-                <a type="button" target="_blank" class="btn btn-danger" href='http://eliminator-slajdow.herokuapp.com/api/issues/delete/@i.id/@(if (request.cookies.get("admin")) request.cookies.get("admin") else  request.queryString.get("token"))'>Usuń</a>
-            </div>
-            <div class="col-md-2">
-                <a type="button" target="_blank" class="btn btn-info" href='http://eliminator-slajdow.herokuapp.com/api/issues/@i.id/ZAAKCEPTOWANO/@(if (request.cookies.get("admin")) request.cookies.get("admin") else  request.queryString.get("token"))'>Status ZAAKCEPTOWANO</a>
-            </div>
-        </div>
+        <span class="delete"> <a type="button" target="_blank" class="btn btn-danger" href='http://eliminator-slajdow.herokuapp.com/api/issues/delete/@i.id/@(if(request.cookies.get("admin")) request.cookies.get("admin") else request.queryString.get("token"))'>
+            Usuń</a></span>
+        <span class="approve"><a type="button" target="_blank" class="btn btn-info" href='http://eliminator-slajdow.herokuapp.com/api/issues/@i.id/ZAAKCEPTOWANO/@(if(request.cookies.get("admin")) request.cookies.get("admin") else request.queryString.get("token"))'>
+            Status ZAAKCEPTOWANO</a></span>
     }
 </li>

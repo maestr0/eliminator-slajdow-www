@@ -3,31 +3,33 @@
 # ~~~~
 
 # Home page
-GET     /                           controllers.Application.index
-GET     /kod                        controllers.Application.sourceCode
-GET     /oautorze                    controllers.Application.about
-GET     /darowizna                    controllers.Application.donation
+GET         /                                                        controllers.Application.index
+GET         /kod                                                     controllers.Application.sourceCode
+GET         /oautorze                                                controllers.Application.about
+GET         /darowizna                                               controllers.Application.donation
+GET         /problem/nowy                                            controllers.Application.newIssue
+GET         /problemy                                                controllers.Application.issues
 
-GET     /eliminator-slajdow-safari               controllers.Application.safariExtension
+GET         /eliminator-slajdow-safari                               controllers.Application.safariExtension
 
 #api
-GET     /api/suggestions/delete/:id/:adminToken     controllers.ApiController.deleteSuggestion(id: String, adminToken:String)
-GET     /api/suggestions/:id/:status/:adminToken     controllers.ApiController.updateSuggestionStatus(id: String, status: String, adminToken: String)
-GET     /api/suggestions                        controllers.ApiController.suggestions
-POST     /api/suggestions                       controllers.ApiController.createSuggestion
+GET         /api/suggestions/delete/:id/:adminToken                  controllers.ApiController.deleteSuggestion(id: String, adminToken:String)
+GET         /api/suggestions/:id/:status/:adminToken                 controllers.ApiController.updateSuggestionStatus(id: String, status: String, adminToken: String)
+GET         /api/suggestions                                         controllers.ApiController.suggestions
+POST        /api/suggestions                                         controllers.ApiController.createSuggestion
 
-GET     /api/issues/delete/:id                  controllers.ApiController.deleteIssueWithAdminCookie(id: String)
+GET         /api/issues/delete/:id                                   controllers.ApiController.deleteIssueWithAdminCookie(id: String)
 
-GET     /api/issues/delete/:id/:adminToken      controllers.ApiController.deleteIssue(id: String, adminToken:String)
-GET     /api/issues/:id/:status/:adminToken     controllers.ApiController.updateIssueStatus(id: String, status: String, adminToken: String)
-GET     /api/issues                             controllers.ApiController.issues
-POST     /api/issues                            controllers.ApiController.createIssue
+GET         /api/issues/delete/:id/:adminToken                       controllers.ApiController.deleteIssue(id: String, adminToken:String)
+GET         /api/issues/:id/:status/:adminToken                      controllers.ApiController.updateIssueStatus(id: String, status: String, adminToken: String)
+GET         /api/issues                                              controllers.ApiController.issues
+POST        /api/issues                                              controllers.ApiController.createIssue
 
 #announcements
-GET     /api/announcements/create/:text/:type/:adminToken     controllers.ApiController.createAnnouncement(text: String, type: String, adminToken: String)
-GET     /api/announcements/delete/:id/:adminToken     controllers.ApiController.deleteAnnouncement(id: String, adminToken: String)
-GET     /api/announcements                  controllers.ApiController.announcements
+GET         /api/announcements/create/:text/:type/:adminToken        controllers.ApiController.createAnnouncement(text: String, type: String, adminToken: String)
+GET         /api/announcements/delete/:id/:adminToken                controllers.ApiController.deleteAnnouncement(id: String, adminToken: String)
+GET         /api/announcements                                       controllers.ApiController.announcements
 
 
 # Map static resources from the /public folder to the /assets URL path
-GET     /assets/*file               controllers.Assets.at(path="/public", file)
+GET         /assets/*file                                            controllers.Assets.at(path="/public", file)
