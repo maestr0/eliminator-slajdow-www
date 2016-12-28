@@ -3,15 +3,20 @@
 <div class="mdl-grid">
     <div class="mdl-cell mdl-cell--4-col"></div>
     <div class="mdl-cell mdl-cell--4-col">
-        <h4>Zgłoś błąd</h4>
-
-        <p>Jeżeli ES nie działa poprawnie na jakiejś stronie, zgłoś to abym mógł zrobić poprawkę.</p>
-
-        <span>
-            @flash.get("success").getOrElse("")
-            @flash.get("error").getOrElse("")
-        </span>
-
+        <div class="row">
+            <h4>Zgłoś błąd</h4>
+        </div>
+        <div class="row">
+            <p>Jeżeli ES nie działa poprawnie na jakiejś stronie, zgłoś to abym mógł zrobić poprawkę.</p>
+        </div>
+        @if(!flash.isEmpty) {
+            <div class="row">
+                <span class="flash-msg">
+                    @flash.get("success").getOrElse("")
+                    @flash.get("error").getOrElse("")
+                </span>
+            </div>
+        }
         <form action="/api/issues" method="post">
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                 <input class="mdl-textfield__input" type="text" id="url" name="galleryUrl" required="required" placeholder="http://...">

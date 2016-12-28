@@ -1,17 +1,21 @@
 @()(implicit request: play.api.mvc.RequestHeader, flash: Flash)
 
-<div class="mdl-grid">
-    <span>
-        @flash.get("success").getOrElse("")
-        @flash.get("error").getOrElse("")
-    </span>
+<div class="mdl-grid issues">
 
-    <button class="report-problem mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+    @if(!flash.isEmpty) {
+        <div class="row">
+            <span class="flash-msg">
+                @flash.get("success").getOrElse("")
+                @flash.get("error").getOrElse("")
+            </span>
+        </div>
+    }
+    <div class="row"><a href="/problem/nowy" class="report-problem mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
         Zgłoś problem
-    </button>
+    </a></div>
 
 
-    <h4 class="panel-title">Zgłoszone problemy</h4>
+    <div class="row"><h4 class="panel-title">Zgłoszone problemy</h4></div>
     <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
         <thead>
             <tr>
@@ -22,7 +26,7 @@
                 @if(request.cookies.get("admin").nonEmpty || request.queryString.get("token").nonEmpty) {
                     <th class="mdl-data-table__cell--non-numeric">Akcje</th>
                 }
-                </tr>
+            </tr>
         </thead>
         <tbody>
         @for(i <- init.Init.dbManager.issues) {

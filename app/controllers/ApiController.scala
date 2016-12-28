@@ -33,11 +33,11 @@ object ApiController extends Controller {
     val issueForm = Form(
       mapping(
         "id" -> optional(text),
-        "comment" -> text,
-        "ua" -> text,
-        "galleryUrl" -> text,
         "esVersion" -> text,
-        "email" -> optional(email),
+        "galleryUrl" -> text,
+        "ua" -> text,
+        "comment" -> text,
+        "email" -> optional(text),
         "status" -> optional(text)
       )(Issue.apply)(Issue.unapply)
     )
