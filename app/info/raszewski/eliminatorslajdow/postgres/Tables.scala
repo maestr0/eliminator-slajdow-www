@@ -52,15 +52,15 @@ trait Tables {
   /** Collection-like TableQuery object for table Alerts */
   lazy val Suggestions = new TableQuery(tag => new Suggestions(tag))
 
-  case class IssuesRow(id: Long, esVersion: String, galleryUrl: String, userAgent: String, comment: String, email: String, status: String, createdAt: java.sql.Timestamp, deletedAt: Option[java.sql.Timestamp])
+  case class IssuesRow(id: Long, esVersion: String, galleryUrl: String, userAgent: String, comment: String, email: Option[String], status: String, createdAt: java.sql.Timestamp, deletedAt: Option[java.sql.Timestamp])
 
   /** Table description of table alerts. Objects of this class serve as prototypes for rows in queries. */
   class Issues(tag: Tag) extends Table[IssuesRow](tag, "issues") {
     def * = (id, esVersion, galleryUrl, userAgent, comment, email, status, createdAt, deletedAt) <>(IssuesRow.tupled, IssuesRow.unapply)
 
     /** Maps whole row to an option. Useful for outer joins. */
-    def ? = (id.?, esVersion.?, galleryUrl.?, userAgent.?, comment.?, email.?, status.?, createdAt.?, deletedAt).shaped.<>({
-      r => import r._; _1.map(_ => IssuesRow.tupled((_1.get, _2.get, _3.get, _4.get, _5.get, _6.get, _7.get, _8.get, _9)))
+    def ? = (id.?, esVersion.?, galleryUrl.?, userAgent.?, comment.?, email, status.?, createdAt.?, deletedAt).shaped.<>({
+      r => import r._; _1.map(_ => IssuesRow.tupled((_1.get, _2.get, _3.get, _4.get, _5.get, _6, _7.get, _8.get, _9)))
     }, (_: Any) => throw new Exception("Inserting into ? projection not supported."))
 
     /** Database column id AutoInc, PrimaryKey */
@@ -73,7 +73,7 @@ trait Tables {
     val userAgent: Column[String] = column[String]("useragent")
     /** Database column period  */
     val comment: Column[String] = column[String]("comment")
-    val email: Column[String] = column[String]("email")
+    val email: Column[Option[String]] = column[Option[String]]("email")
     val status: Column[String] = column[String]("status")
     val createdAt: Column[java.sql.Timestamp] = column[java.sql.Timestamp]("created_at")
     /** Database column deleted_at  */

@@ -1,7 +1,7 @@
 @(pageName: String)
 <nav class="mdl-navigation mdl-layout--large-screen-only">
     <a class="mdl-navigation__link @{if(pageName=="start") "is-active" else ""}" href="/">Start</a>
-    <a class="mdl-navigation__link @{if(pageName=="newIssue") "is-active" else ""}" href="/problem/nowy">Zgłoś problem</a>
+    <a class="nav-report-problem mdl-navigation__link @{if(pageName=="newIssue") "is-active" else ""}" href="/problem/nowy">Zgłoś problem</a>
     <a class="mdl-navigation__link @{if(pageName=="issues") "is-active" else ""}" href="/problemy">Zgłoszone problemy</a>
     <a class="mdl-navigation__link @{if(pageName=="sourceCode") "is-active" else ""}" href="/kod">Kod źródłowy ES</a>
     <a class="mdl-navigation__link @{if(pageName=="about") "is-active" else ""}" href="/oautorze">O autorze</a>

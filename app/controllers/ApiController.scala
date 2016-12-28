@@ -2,10 +2,13 @@ package controllers
 
 import init.Init
 import models.{Announcement, Issue, Suggestion}
+import play.api.data.Form
 import play.api.libs.json._
 import play.api.mvc._
 
 import scala.util.{Failure, Success}
+import play.api.data._
+import play.api.data.Forms._
 
 object ApiController extends Controller {
 
@@ -26,19 +29,29 @@ object ApiController extends Controller {
     Ok(Json.toJson(announcements))
   }
 
-  def createIssue = Action(parse.json) {
-    implicit request =>
-      request.body.asOpt[Issue] match {
-        case Some(issue) =>
-          if (issue.comment.isEmpty || issue.galleryUrl.isEmpty)
-            InternalServerError("Proszę wypełnić wszystkie wymagane pola")
-          else
-            db.createIssue(issue) match {
-              case Success(i) => Created(views.html.issue(i))
-              case _ => InternalServerError("Cannot parse JSON as Issue.")
-            }
-        case None => BadRequest("Cannot parse JSON as Issue.")
+  def createIssue = Action { implicit request =>
+    val issueForm = Form(
+      mapping(
+        "id" -> optional(text),
+        "comment" -> text,
+        "ua" -> text,
+        "galleryUrl" -> text,
+        "esVersion" -> text,
+        "email" -> optional(email),
+        "status" -> optional(text)
+      )(Issue.apply)(Issue.unapply)
+    )
+
+    issueForm.bindFromRequest().fold(
+      formWithErrors => {
+        val errorMsg = formWithErrors.errors.map(_.message).mkString(", ")
+        Redirect(routes.Application.newIssue()).flashing("error" -> s"Wystąpił błąd: ${errorMsg}" )
+      },
+      issue => {
+        db.createIssue(issue)
+        Redirect(routes.Application.issues()).flashing("success" -> "Dodano zgłoszenie")
       }
+    )
   }
 
   def createAnnouncement(text: String, aType: String, adminToken: String) = Action {

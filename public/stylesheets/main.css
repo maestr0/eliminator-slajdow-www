@@ -62,16 +62,17 @@ body {
 }
 
 .issue-list .version {
-    width:150px;
+    width: 150px;
 }
 
 .issue-list .status {
-    width:150px;
+    width: 150px;
 }
 
 .issue-list .url {
-    width:150px;
+    width: 150px;
 }
+
 .issue-list .comment {
 }
 
@@ -81,6 +82,18 @@ body {
 
 tr.wrap-words {
     white-space: normal;
+}
+
+header .mdl-navigation__link.nav-report-problem {
+    background: rgb(255,64,129);
+}
+
+form .mdl-textfield {
+    width: 100%;
+}
+
+.mdl-js-submit {
+    margin-top: 50px;
 }
 
 code {

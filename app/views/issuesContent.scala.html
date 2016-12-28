@@ -1,23 +1,33 @@
-@()(implicit request: play.api.mvc.RequestHeader)
+@()(implicit request: play.api.mvc.RequestHeader, flash: Flash)
 
 <div class="mdl-grid">
-        <h4 class="panel-title">Zgłoszone problemy</h4>
-        <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
-            <thead>
-                <tr>
-                    <th class="mdl-data-table__cell--non-numeric">Status</th>
-                    <th class="mdl-data-table__cell--non-numeric">Wersja</th>
-                    <th class="mdl-data-table__cell--non-numeric">URL</th>
-                    <th class="mdl-data-table__cell--non-numeric">Opis</th>
-                    @if(request.cookies.get("admin").nonEmpty || request.queryString.get("token").nonEmpty) {
-                        <th class="mdl-data-table__cell--non-numeric">Akcje</th>
-                    }
+    <span>
+        @flash.get("success").getOrElse("")
+        @flash.get("error").getOrElse("")
+    </span>
+
+    <button class="report-problem mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+        Zgłoś problem
+    </button>
+
+
+    <h4 class="panel-title">Zgłoszone problemy</h4>
+    <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+        <thead>
+            <tr>
+                <th class="mdl-data-table__cell--non-numeric">Status</th>
+                <th class="mdl-data-table__cell--non-numeric">Wersja</th>
+                <th class="mdl-data-table__cell--non-numeric">URL</th>
+                <th class="mdl-data-table__cell--non-numeric">Opis</th>
+                @if(request.cookies.get("admin").nonEmpty || request.queryString.get("token").nonEmpty) {
+                    <th class="mdl-data-table__cell--non-numeric">Akcje</th>
+                }
                 </tr>
-            </thead>
-            <tbody>
-            @for(i <- init.Init.dbManager.issues) {
-                @issue(i)
-            }
-            </tbody>
-        </table>
+        </thead>
+        <tbody>
+        @for(i <- init.Init.dbManager.issues) {
+            @issue(i)
+        }
+        </tbody>
+    </table>
 </div>

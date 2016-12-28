@@ -3,7 +3,7 @@ package models
 import play.api.libs.functional.syntax._
 import play.api.libs.json._
 
-case class Issue(id: Option[String], esVersion: String, galleryUrl: String, userAgent: String, comment: String, email: String, status: Option[String])
+case class Issue(id: Option[String], esVersion: String, galleryUrl: String, userAgent: String, comment: String, email: Option[String], status: Option[String])
 
 object Issue {
   final val esVersion = "esVersion"
@@ -20,7 +20,7 @@ object Issue {
       (__ \ galleryUrl).read[String] and
       (__ \ userAgent).read[String] and
       (__ \ comment).read[String] and
-      (__ \ email).read[String] and
+      (__ \ email).readNullable[String] and
       (__ \ status).readNullable[String]
     )(Issue.apply _)
 
@@ -30,7 +30,7 @@ object Issue {
       (__ \ galleryUrl).write[String] and
       (__ \ userAgent).write[String] and
       (__ \ comment).write[String] and
-      (__ \ email).write[String] and
+      (__ \ email).writeNullable[String] and
       (__ \ status).writeNullable[String]
     )(unlift(Issue.unapply))
 }

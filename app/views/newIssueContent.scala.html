@@ -1,51 +1,36 @@
-@()(implicit request: play.api.mvc.RequestHeader)
-<h2>Zgłoś błąd na już obsługiwanym Portalu</h2>
+@()(implicit request: play.api.mvc.RequestHeader, flash: Flash)
 
-<p>Jeżeli ES nie działa poprawnie na jakiejś stronie, zgłoś to abym mógł zrobić poprawkę.</p>
+<div class="mdl-grid">
+    <div class="mdl-cell mdl-cell--4-col"></div>
+    <div class="mdl-cell mdl-cell--4-col">
+        <h4>Zgłoś błąd</h4>
 
-<p>
-    <button type="button" data-toggle="modal" data-target="#issueModal" class="btn btn-danger btn-lg"><span
-    class="glyphicon glyphicon-warning-sign"></span> Zgłoś Błąd
-    </button>
-</p>
+        <p>Jeżeli ES nie działa poprawnie na jakiejś stronie, zgłoś to abym mógł zrobić poprawkę.</p>
 
+        <span>
+            @flash.get("success").getOrElse("")
+            @flash.get("error").getOrElse("")
+        </span>
 
-    <!-- Modal -->
-<div class="modal fade" id="issueModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span
-                class="sr-only">Zamknij</span></button>
-                <h4 class="modal-title" id="myModalLabel">Zgłoś problem</h4>
+        <form action="/api/issues" method="post">
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <input class="mdl-textfield__input" type="text" id="url" name="galleryUrl" required="required" placeholder="http://...">
+                <label class="mdl-textfield__label" for="url">Link do galerii na której występuje problem</label>
             </div>
-            <div class="modal-body">
-                <form role="form">
-                    <div class="form-group">
-                        <label for="issue_gallery_url">Link do galerii</label>
-                        <input type="url" class="form-control" id="issue_gallery_url"
-                        placeholder="www.przykladowastrona.pl/galeria1">
-                    </div>
-                    <div class="form-group">
-                        <label for="issue_comment">Opis problemu</label>
-                        <textarea class="form-control" rows="3" id="issue_comment"></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label for="issue_email">Email</label>
-                        <input type="email" class="form-control" id="issue_email" placeholder="">
-                    </div>
-                    <div class="form-group">
-                        <label for="issue_es_version">Wersja Eliminatora Slajdów</label>
-                        <input type="url" class="form-control" id="issue_es_version" placeholder="">
-                    </div>
-                </form>
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <textarea class="mdl-textfield__input" type="text" rows= "3" id="desc" name="comment" required="required"></textarea>
+                <label class="mdl-textfield__label" for="desc">Opis problemu</label>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Anuluj</button>
-                <button id="addIssue" type="button" class="btn btn-danger "><span
-                class="glyphicon glyphicon-warning-sign"></span> Zgłoś Problem
-                </button>
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <input class="mdl-textfield__input" type="text" name="email" id="email">
+                <label class="mdl-textfield__label" for="email">Email (opcjonalnie)</label>
             </div>
-        </div>
+            <input type="hidden" class="form-control" id="issue_es_version" name="esVersion">
+            <input type="hidden" class="form-control" id="ua" name="ua">
+            <div class="mdl-submit mdl-js-submit">
+                <button class="report-problem mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" type="submit">Zgłoś</button>
+            </div>
+        </form>
     </div>
+    <div class="mdl-cell mdl-cell--4-col"></div>
 </div>

@@ -40,7 +40,7 @@ object EmailSender {
       s"<a href='http://eliminator-slajdow.herokuapp.com/api/issues/${issue.id}/ZAAKCEPTOWANO/$adminToken'>Status - Zaakceptowano</a><br />" +
       s"<a href='http://eliminator-slajdow.herokuapp.com/api/issues/${issue.id}/ODRZUCONO/$adminToken'>Status - Odrzucono</a>"
 
-    send("ES Problem", content, issue.email)
+    send("ES Problem", content, issue.email.getOrElse("N/A"))
   }
 
   def sendCreateSuggestionNotification(suggestion: SuggestionsRow) = {
