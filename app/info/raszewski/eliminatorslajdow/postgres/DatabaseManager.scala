@@ -47,7 +47,7 @@ class DatabaseManager() {
   def issues = {
     db.withTransaction {
       implicit session =>
-        Tables.Issues.sortBy(_.createdAt).filter(_.deletedAt.isEmpty).list.reverse
+        Tables.Issues.sortBy(_.createdAt).filter(_.deletedAt.isEmpty).list.reverse.take(100)
     }
   }
 

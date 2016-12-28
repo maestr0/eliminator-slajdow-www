@@ -79,6 +79,10 @@ body {
     margin-top: 13px;
 }
 
+tr.wrap-words {
+    white-space: normal;
+}
+
 code {
     font-size: 80%;
 }
