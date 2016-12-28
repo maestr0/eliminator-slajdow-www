@@ -93,6 +93,10 @@ body {
     font-size: 20px;
 }
 
+a.header-title {
+    color: white;
+    text-decoration: none;
+}
 tr.wrap-words {
     white-space: normal;
 }
