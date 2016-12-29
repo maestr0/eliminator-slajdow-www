@@ -30,10 +30,6 @@ object Application extends Controller {
     Ok(views.html.index("donation"))
   }
 
-  def admin = Action { implicit request =>
-    Ok(views.html.index("donation"))
-  }
-
   def safariExtension = Action { implicit request =>
     val app = Play.application
     val file = Play.application.getFile("public/safari/eliminator-slajdow.safariextz")
