@@ -70,6 +70,16 @@
                     @navigationBar(pageName)
                 </div>
             </header>
+            <div class="mdl-layout__drawer">
+                <span class="mdl-layout-title">Eliminator Slajdów</span>
+                <nav class="mdl-navigation">
+                    <a class="mdl-navigation__link @{if(pageName=="start") "is-active" else ""}" href="/">Start</a>
+                    <a class="nav-report-problem mdl-navigation__link @{if(pageName=="newIssue") "is-active" else ""}" href="/problem/nowy">Zgłoś problem</a>
+                    <a class="mdl-navigation__link @{if(pageName=="issues") "is-active" else ""}" href="/problemy">Zgłoszone problemy</a>
+                    <a class="mdl-navigation__link @{if(pageName=="sourceCode") "is-active" else ""}" href="/kod">Kod źródłowy ES</a>
+                    <a class="mdl-navigation__link @{if(pageName=="about") "is-active" else ""}" href="/oautorze">O autorze</a>
+                </nav>
+            </div>
             <main class="mdl-layout__content">
                 <div class="page-content">
 
