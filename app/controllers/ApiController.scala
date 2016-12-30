@@ -2,13 +2,27 @@ package controllers
 
 import init.Init
 import models.{Announcement, Issue, Suggestion}
+import play.api.Play
 import play.api.data.Form
 import play.api.libs.json._
-import play.api.mvc._
 
 import scala.util.{Failure, Success}
-import play.api.data._
 import play.api.data.Forms._
+import play.api.libs.ws.WS
+import scala.concurrent.ExecutionContext
+import scala.concurrent.Future
+import scala.concurrent.Future
+import scala.concurrent.duration._
+
+import play.api.mvc._
+import play.api.libs.ws._
+
+import akka.actor.ActorSystem
+import akka.util.ByteString
+
+import scala.concurrent.ExecutionContext
+import scala.concurrent.ExecutionContext.Implicits.global
+
 
 object ApiController extends Controller {
 
@@ -29,7 +43,8 @@ object ApiController extends Controller {
     Ok(Json.toJson(announcements))
   }
 
-  def createIssue = Action { implicit request =>
+  def createIssue = Action.async { implicit request =>
+
     val issueForm = Form(
       mapping(
         "id" -> optional(text),
@@ -45,11 +60,28 @@ object ApiController extends Controller {
     issueForm.bindFromRequest().fold(
       formWithErrors => {
         val errorMsg = formWithErrors.errors.map(_.message).mkString(", ")
-        Redirect(routes.Application.newIssue()).flashing("error" -> s"Wystąpił błąd: ${errorMsg}" )
+        Future.successful(Redirect(routes.Application.newIssue()).flashing("error" -> s"Wystąpił błąd: ${errorMsg}"))
       },
       issue => {
-        db.createIssue(issue)
-        Redirect(routes.Application.issues()).flashing("success" -> "Dodano zgłoszenie")
+        val form1 = request.body.asFormUrlEncoded.get
+        if (!form1.contains("g-recaptcha-response")) {
+          Future.successful(Redirect(routes.Application.newIssue()).flashing("error" -> s"Brak tokenu. Nie jesteś człowkiekiem!"))
+        } else {
+          val token = form1.get("g-recaptcha-response").get.head
+          println(token)
+          WS.url("https://www.google.com/recaptcha/api/siteverify").post(Map(
+            "secret" -> Seq(Play.current.configuration.getString("recaptcha.secret").getOrElse("dev")),
+            "response" -> Seq(token)
+          )).map(response => {
+            if ((response.json \ "success").as[Boolean]) {
+              db.createIssue(issue)
+              Redirect(routes.Application.issues()).flashing("success" -> "Dodano zgłoszenie")
+            } else {
+              Redirect(routes.Application.newIssue()).flashing("error" -> s"Bledny tokenu. Nie jesteś człowkiekiem!")
+            }
+          })
+
+        }
       }
     )
   }
@@ -59,22 +91,6 @@ object ApiController extends Controller {
       case Success(true) => Created
       case _ => InternalServerError("Cannot parse JSON as Issue.")
     }
-  }
-
-
-  def createSuggestion = Action(parse.json) {
-    implicit request =>
-      request.body.asOpt[Suggestion] match {
-        case Some(suggestion) =>
-          if (suggestion.pageUrl.isEmpty || suggestion.galleryUrl.isEmpty)
-            InternalServerError("Proszę wypełnić wszystkie wymagane pola")
-          else
-            db.createSuggestion(suggestion) match {
-              case Success(s) => Created(views.html.suggestion(s))
-              case _ => InternalServerError("Cannot parse JSON as Suggestion.")
-            }
-        case None => BadRequest("Cannot parse JSON as Suggestion.")
-      }
   }
 
   def deleteIssueWithAdminCookie(id: String) = Action { request =>

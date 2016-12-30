@@ -10,14 +10,7 @@ GET         /darowizna                                               controllers
 GET         /problem/nowy                                            controllers.Application.newIssue
 GET         /problemy                                                controllers.Application.issues
 
-GET         /eliminator-slajdow-safari                               controllers.Application.safariExtension
-
 #api
-GET         /api/suggestions/delete/:id/:adminToken                  controllers.ApiController.deleteSuggestion(id: String, adminToken:String)
-GET         /api/suggestions/:id/:status/:adminToken                 controllers.ApiController.updateSuggestionStatus(id: String, status: String, adminToken: String)
-GET         /api/suggestions                                         controllers.ApiController.suggestions
-POST        /api/suggestions                                         controllers.ApiController.createSuggestion
-
 GET         /api/issues/delete/:id                                   controllers.ApiController.deleteIssueWithAdminCookie(id: String)
 
 GET         /api/issues/delete/:id/:adminToken                       controllers.ApiController.deleteIssue(id: String, adminToken:String)

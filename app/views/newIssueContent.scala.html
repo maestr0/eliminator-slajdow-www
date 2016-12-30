@@ -17,7 +17,7 @@
                 </span>
             </div>
         }
-        <form action="/api/issues" method="post">
+        <form action="/api/issues" method="post" id="issue-form">
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                 <input class="mdl-textfield__input" type="text" id="url" name="galleryUrl" required="required" placeholder="http://...">
                 <label class="mdl-textfield__label" for="url">Link do galerii na której występuje problem</label>
@@ -32,13 +32,38 @@
             </div>
             <input type="hidden" class="form-control" id="issue_es_version" name="esVersion">
             <input type="hidden" class="form-control" id="ua" name="ua">
+            <div id='recaptcha' class="g-recaptcha"
+            data-sitekey="6LczJhAUAAAAAHHHwIlguwKRflRG3rmydcwHl-T_"
+            data-callback="onSubmit"
+            data-size="invisible"></div>
             <div class="mdl-submit mdl-js-submit">
-                <button class="report-problem mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" type="submit">Zgłoś</button>
+                <button class="report-problem mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id='submit_button'>
+                    Zgłoś</button>
             </div>
         </form>
     </div>
     <div class="mdl-cell mdl-cell--4-col"></div>
 </div>
-    <script>
+<script>
         document.getElementById("ua").value = navigator.userAgent;
-    </script>
+
+        function onSubmit(token) {
+            document.getElementById("issue-form").submit();
+        }
+
+        function validate(event) {
+            if (document.getElementById('desc').validity.valid && document.getElementById('url').validity.valid) {
+                event.preventDefault();
+                grecaptcha.execute();
+            } else {
+                console.log("form validation failed");
+            }
+        }
+
+        function onload() {
+            var element = document.getElementById('submit_button');
+            element.onclick = validate;
+        }
+
+        onload();
+</script>
