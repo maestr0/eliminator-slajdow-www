@@ -35,10 +35,10 @@ object EmailSender {
       s"<p>${issue.email}</p>" +
       s"<p>${issue.createdAt}</p>" +
       s"<p>${issue.userAgent}</p>" +
-      s"<a href='http://eliminator-slajdow.herokuapp.com/'>ES HP</a><br />" +
-      s"<a href='http://eliminator-slajdow.herokuapp.com/api/issues/delete/${issue.id}/$adminToken'>Usun</a><br />" +
-      s"<a href='http://eliminator-slajdow.herokuapp.com/api/issues/${issue.id}/ZAAKCEPTOWANO/$adminToken'>Status - Zaakceptowano</a><br />" +
-      s"<a href='http://eliminator-slajdow.herokuapp.com/api/issues/${issue.id}/ODRZUCONO/$adminToken'>Status - Odrzucono</a>"
+      s"<a href='http://eliminator-slajdow.raszewski.info/'>ES HP</a><br />" +
+      s"<a href='http://eliminator-slajdow.raszewski.info/api/issues/delete/${issue.id}/$adminToken'>Usun</a><br />" +
+      s"<a href='http://eliminator-slajdow.raszewski.info/api/issues/${issue.id}/ZAAKCEPTOWANO/$adminToken'>Status - Zaakceptowano</a><br />" +
+      s"<a href='http://eliminator-slajdow.raszewski.info/api/issues/${issue.id}/ODRZUCONO/$adminToken'>Status - Odrzucono</a>"
 
     send("ES Problem", content, issue.email.getOrElse("N/A"))
   }
@@ -49,10 +49,10 @@ object EmailSender {
       s"<p>${suggestion.email}</p>" +
       s"<p>${suggestion.createdAt}</p>" +
       s"<p>${suggestion.userAgent}</p>" +
-      s"<a href='http://eliminator-slajdow.herokuapp.com/'>ES HP</a><br />" +
-      s"<a href='http://eliminator-slajdow.herokuapp.com/api/suggestions/delete/${suggestion.id}/$adminToken'>Usun</a><br />" +
-      s"<a href='http://eliminator-slajdow.herokuapp.com/api/suggestions/${suggestion.id}/ZAAKCEPTOWANO/$adminToken'>Status - Zaakceptowano</a><br />" +
-      s"<a href='http://eliminator-slajdow.herokuapp.com/api/suggestions/${suggestion.id}/ODRZUCONO/$adminToken'>Status - Odrzucono</a>"
+      s"<a href='http://eliminator-slajdow.raszewski.info/'>ES HP</a><br />" +
+      s"<a href='http://eliminator-slajdow.raszewski.info/api/suggestions/delete/${suggestion.id}/$adminToken'>Usun</a><br />" +
+      s"<a href='http://eliminator-slajdow.raszewski.info/api/suggestions/${suggestion.id}/ZAAKCEPTOWANO/$adminToken'>Status - Zaakceptowano</a><br />" +
+      s"<a href='http://eliminator-slajdow.raszewski.info/api/suggestions/${suggestion.id}/ODRZUCONO/$adminToken'>Status - Odrzucono</a>"
 
     send("ES Sugestia", content, suggestion.email)
   }

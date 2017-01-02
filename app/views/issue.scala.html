@@ -14,10 +14,10 @@
 
     @if(request.cookies.get("admin").nonEmpty || request.queryString.get("token").nonEmpty) {
         <td class="mdl-data-table__cell--non-numeric">
-            <span class="delete"> <a type="button" target="_blank" class="btn btn-danger" href='http://eliminator-slajdow.herokuapp.com/api/issues/delete/@i.id/@(if(request.cookies.get("admin").isDefined) request.cookies.get("admin").get.value else request.queryString.get("token"))'>
+            <span class="delete"> <a type="button" target="_blank" class="btn btn-danger" href='/api/issues/delete/@i.id/@(if(request.cookies.get("admin").isDefined) request.cookies.get("admin").get.value else request.queryString.get("token"))'>
                 Usuń</a></span>
             <br/>
-            <span class="approve"><a type="button" target="_blank" class="btn btn-info" href='http://eliminator-slajdow.herokuapp.com/api/issues/@i.id/ZAAKCEPTOWANO/@(if(request.cookies.get("admin").isDefined) request.cookies.get("admin").get.value else request.queryString.get("token"))'>
+            <span class="approve"><a type="button" target="_blank" class="btn btn-info" href='/api/issues/@i.id/ZAAKCEPTOWANO/@(if(request.cookies.get("admin").isDefined) request.cookies.get("admin").get.value else request.queryString.get("token"))'>
                 Zaakceptuj</a></span>
         </td>
     }
