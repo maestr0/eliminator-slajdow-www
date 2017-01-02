@@ -6,8 +6,19 @@
         <div class="row">
             <h4>Zgłoś błąd</h4>
         </div>
-        <div class="row">
+        <div class="row reportIssue">
             <p>Jeżeli ES nie działa poprawnie na jakiejś stronie, zgłoś to abym mógł zrobić poprawkę.</p>
+            <p>Przed zgłoszeniem błędu upewnij się że ES jest aktywny na danej stronie.</p>
+            <p>Ikona powinna być kolorowa</p>
+            <img src="@routes.Assets.at("images/ikona-aktywna.png")" />
+            <p>Ikona szara świadczy o tym ze ES jest wyłączony na danej stronie.</p>
+            <img src="@routes.Assets.at("images/ikona-nieaktywna.png")" />
+            <p>Jeśli ikona ES jest szara, otworz opcje ES i sprawdź czy wszystkie pozycje są zaznaczone na liście domen.</p>
+            <img src="@routes.Assets.at("images/popup-opcje.png")"/><br/>
+            <img src="@routes.Assets.at("images/status.png")"/><br/>
+            <img src="@routes.Assets.at("images/lista-domen.png")"/><br/>
+            <p>Gdy ES działa powinieneś widzieć mniej więcej taki rezultat.</p>
+            <img src="@routes.Assets.at("images/es-dziala.png")" />
         </div>
         @if(!flash.isEmpty) {
             <div class="row">
@@ -17,6 +28,10 @@
                 </span>
             </div>
         }
+        <p>Jeśli ES dalej nie działa to zgłoś błąd tutaj. Postaraj się opisać dokładnie co się dzieje.</p>
+        <p>Przykład 1: ES nie działa na stronie XXX. Galeria zdjęć dalej ma slajdy i jest wpełni funkcjonalna.</p>
+        <p>Przykład 2: ES nie działa na stronie XXX. Galeria zdjęć ma tylko jeden slajd. ES usunął przyciski nawigacyjne galerii i nie da się nic zrobić.</p>
+        <p>Przykład 3: ES nie działa poprawnie na stronie XXX. ES wyświetlił część slajdów poprawnie ale niektóre slajdy nie mają zdjęć.</p>
         <form action="/api/issues" method="post" id="issue-form">
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                 <input class="mdl-textfield__input" type="text" id="url" name="galleryUrl" required="required" placeholder="http://...">
