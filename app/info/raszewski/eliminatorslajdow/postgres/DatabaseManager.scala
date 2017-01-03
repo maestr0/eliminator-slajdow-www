@@ -17,7 +17,7 @@ class DatabaseManager() {
 
   val ds = new BoneCPDataSource
   lazy val config = Play.current.configuration
-  val AdminToken = config.getString("adminToken").getOrElse("ADMIN_TOKEN")
+  val AdminToken = config.getString("adminToken").getOrElse("dev")
   lazy val db = {
     lazy val rdsJdbcConnectionString = config.getString("db.jdbc").getOrElse("")
     lazy val rdsDriver = config.getString("db.driver").getOrElse("")
@@ -44,10 +44,20 @@ class DatabaseManager() {
     }
   }
 
-  def issues = {
+  def issues(groupByUrl: Boolean) = {
     db.withTransaction {
       implicit session =>
-        Tables.Issues.sortBy(_.createdAt).filter(_.deletedAt.isEmpty).list.reverse.take(100)
+        if (groupByUrl)
+          Tables.Issues.sortBy(_.galleryUrl).filter(_.deletedAt.isEmpty).list
+        else
+          Tables.Issues.sortBy(_.createdAt).filter(_.deletedAt.isEmpty).list.reverse.take(100)
+    }
+  }
+
+  def issues() = {
+    db.withTransaction {
+      implicit session =>
+        Tables.Issues.sortBy(_.createdAt).filter(_.deletedAt.isEmpty).list.reverse
     }
   }
 

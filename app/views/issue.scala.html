@@ -4,6 +4,8 @@
         <span class="mdl-list__item-secondary-action status">
             <span class="label label-warning">@i.status</span>
             <span class="@i.status"></span>
+            <br/>
+            @{new org.joda.time.DateTime(i.createdAt.date).toString("YYYY-MM-DD hh:mm")}
         </span>
     </td>
     <td class="mdl-data-table__cell--non-numeric">@i.esVersion</td>
@@ -14,10 +16,10 @@
 
     @if(request.cookies.get("admin").nonEmpty || request.queryString.get("token").nonEmpty) {
         <td class="mdl-data-table__cell--non-numeric">
-            <span class="delete"> <a type="button" target="_blank" class="btn btn-danger" href='/api/issues/delete/@i.id/@(if(request.cookies.get("admin").isDefined) request.cookies.get("admin").get.value else request.queryString.get("token"))'>
+            <span class="delete"> <a type="button" target="_blank" class="btn btn-danger deleteButton" href='/api/issues/delete/@i.id/@(if(request.cookies.get("admin").isDefined) request.cookies.get("admin").get.value else request.queryString.get("token"))'>
                 Usuń</a></span>
             <br/>
-            <span class="approve"><a type="button" target="_blank" class="btn btn-info" href='/api/issues/@i.id/ZAAKCEPTOWANO/@(if(request.cookies.get("admin").isDefined) request.cookies.get("admin").get.value else request.queryString.get("token"))'>
+            <span class="approve"><a type="button" target="_blank" class="btn btn-info approveButton" href='/api/issues/@i.id/ZAAKCEPTOWANO/@(if(request.cookies.get("admin").isDefined) request.cookies.get("admin").get.value else request.queryString.get("token"))'>
                 Zaakceptuj</a></span>
         </td>
     }
